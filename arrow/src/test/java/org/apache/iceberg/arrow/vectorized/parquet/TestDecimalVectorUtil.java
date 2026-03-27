@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 public class TestDecimalVectorUtil {
 
   @Test
-  public void testPadBigEndianBytes() {
+  public void padBigEndianBytes() {
     BigInteger bigInt = new BigInteger("12345");
     byte[] bytes = bigInt.toByteArray();
     byte[] paddedBytes = DecimalVectorUtil.padBigEndianBytes(bytes, 16);
@@ -38,7 +38,7 @@ public class TestDecimalVectorUtil {
   }
 
   @Test
-  public void testPadBigEndianBytesNegative() {
+  public void padBigEndianBytesNegative() {
     BigInteger bigInt = new BigInteger("-12345");
     byte[] bytes = bigInt.toByteArray();
     byte[] paddedBytes = DecimalVectorUtil.padBigEndianBytes(bytes, 16);
@@ -49,7 +49,7 @@ public class TestDecimalVectorUtil {
   }
 
   @Test
-  public void testPadBigEndianBytesZero() {
+  public void padBigEndianBytesZero() {
     byte[] bytes = BigInteger.ZERO.toByteArray();
     byte[] paddedBytes = DecimalVectorUtil.padBigEndianBytes(bytes, 16);
 
@@ -66,7 +66,7 @@ public class TestDecimalVectorUtil {
   }
 
   @Test
-  public void testPadBigEndianBytesOverflow() {
+  public void padBigEndianBytesOverflow() {
     byte[] bytes = new byte[17];
     assertThatThrownBy(() -> DecimalVectorUtil.padBigEndianBytes(bytes, 16))
         .isInstanceOf(IllegalArgumentException.class)

@@ -163,7 +163,7 @@ public class TestArrowReader {
    * rows match the expected value.
    */
   @Test
-  public void testReadAll() throws Exception {
+  public void readAll() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     readAndCheckQueryResult(
@@ -178,7 +178,7 @@ public class TestArrowReader {
    * values. The test also asserts the total number of rows match the expected value.
    */
   @Test
-  public void testReadAllWithConstantRecords() throws Exception {
+  public void readAllWithConstantRecords() throws Exception {
     writeTableWithConstantRecords();
     Table table = tables.load(tableLocation);
     readAndCheckQueryResult(
@@ -193,7 +193,7 @@ public class TestArrowReader {
    * the expected value.
    */
   @Test
-  public void testReadAllWithSmallerBatchSize() throws Exception {
+  public void readAllWithSmallerBatchSize() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     TableScan scan = table.newScan();
@@ -207,7 +207,7 @@ public class TestArrowReader {
    * asserts the total number of rows match the expected value.
    */
   @Test
-  public void testReadRangeFilter() throws Exception {
+  public void readRangeFilter() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     LocalDateTime beginTime = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
@@ -227,7 +227,7 @@ public class TestArrowReader {
    * asserts that the result is empty.
    */
   @Test
-  public void testReadRangeFilterEmptyResult() throws Exception {
+  public void readRangeFilterEmptyResult() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     LocalDateTime beginTime = LocalDateTime.of(2021, 1, 1, 0, 0, 0);
@@ -256,7 +256,7 @@ public class TestArrowReader {
    * asserts the total number of rows match the expected value.
    */
   @Test
-  public void testReadColumnFilter1() throws Exception {
+  public void readColumnFilter1() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     TableScan scan = table.newScan().select("timestamp", "int", "string");
@@ -274,7 +274,7 @@ public class TestArrowReader {
    * asserts the total number of rows match the expected value.
    */
   @Test
-  public void testReadColumnFilter2() throws Exception {
+  public void readColumnFilter2() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     TableScan scan = table.newScan().select("timestamp");
@@ -287,7 +287,7 @@ public class TestArrowReader {
    * is idempotent.
    */
   @Test
-  public void testHasNextIsIdempotent() throws Exception {
+  public void hasNextIsIdempotent() throws Exception {
     writeTableWithIncrementalRecords();
     Table table = tables.load(tableLocation);
     TableScan scan = table.newScan();
@@ -308,7 +308,7 @@ public class TestArrowReader {
    * Parquet API, then reads it via VectorizedArrowReader.
    */
   @Test
-  public void testTimestampMillisAreReadCorrectly() throws Exception {
+  public void timestampMillisAreReadCorrectly() throws Exception {
     tables = new HadoopTables();
     Schema schema =
         new Schema(Types.NestedField.required(1, "ts_millis", Types.TimestampType.withZone()));
