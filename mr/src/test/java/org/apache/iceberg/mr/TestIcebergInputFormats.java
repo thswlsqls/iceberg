@@ -140,7 +140,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testUnpartitionedTable() throws Exception {
+  public void unpartitionedTable() throws Exception {
     helper.createUnpartitionedTable();
     List<Record> expectedRecords = helper.generateRandomRecords(1, 0L);
     helper.appendToTable(null, expectedRecords);
@@ -149,7 +149,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testPartitionedTable() throws Exception {
+  public void partitionedTable() throws Exception {
     helper.createTable();
     List<Record> expectedRecords = helper.generateRandomRecords(1, 0L);
     expectedRecords.get(0).set(2, "2020-03-20");
@@ -159,7 +159,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testFilterExp() throws Exception {
+  public void filterExp() throws Exception {
     helper.createTable();
 
     List<Record> expectedRecords = helper.generateRandomRecords(2, 0L);
@@ -176,7 +176,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testResiduals() throws Exception {
+  public void residuals() throws Exception {
     helper.createTable();
 
     List<Record> writeRecords = helper.generateRandomRecords(2, 0L);
@@ -203,7 +203,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testProjection() throws Exception {
+  public void projection() throws Exception {
     helper.createTable();
     List<Record> inputRecords = helper.generateRandomRecords(1, 0L);
     helper.appendToTable(Row.of("2020-03-20", 0), inputRecords);
@@ -228,7 +228,7 @@ public class TestIcebergInputFormats {
       PartitionSpec.builderFor(LOG_SCHEMA).identity("date").identity("level").build();
 
   @TestTemplate
-  public void testIdentityPartitionProjections() throws Exception {
+  public void identityPartitionProjections() throws Exception {
     helper.createTable(LOG_SCHEMA, IDENTITY_PARTITION_SPEC);
     List<Record> inputRecords = helper.generateRandomRecords(10, 0L);
 
@@ -299,7 +299,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testSnapshotReads() throws Exception {
+  public void snapshotReads() throws Exception {
     helper.createUnpartitionedTable();
 
     List<Record> expectedRecords = helper.generateRandomRecords(1, 0L);
@@ -313,7 +313,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testLocality() throws Exception {
+  public void locality() throws Exception {
     helper.createUnpartitionedTable();
     List<Record> expectedRecords = helper.generateRandomRecords(1, 0L);
     helper.appendToTable(null, expectedRecords);
@@ -330,7 +330,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testCustomCatalog() throws IOException {
+  public void customCatalog() throws IOException {
     String warehouseLocation = temp.resolve("hadoop_catalog").toAbsolutePath().toString();
     conf.set("warehouse.location", warehouseLocation);
     conf.set(InputFormatConfig.CATALOG_NAME, Catalogs.ICEBERG_DEFAULT_CATALOG_NAME);
@@ -358,7 +358,7 @@ public class TestIcebergInputFormats {
   }
 
   @TestTemplate
-  public void testWorkerPool() throws Exception {
+  public void workerPool() throws Exception {
     Table table = helper.createUnpartitionedTable();
     UserGroupInformation user1 =
         UserGroupInformation.createUserForTesting("user1", new String[] {});

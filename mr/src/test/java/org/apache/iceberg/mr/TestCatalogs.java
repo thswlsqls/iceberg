@@ -61,7 +61,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadTableFromLocation() throws IOException {
+  public void loadTableFromLocation() throws IOException {
     conf.set(CatalogUtil.ICEBERG_CATALOG_TYPE, Catalogs.LOCATION);
 
     assertThatThrownBy(() -> Catalogs.loadTable(conf))
@@ -77,7 +77,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadTableFromCatalog() throws IOException {
+  public void loadTableFromCatalog() throws IOException {
     String defaultCatalogName = "default";
     String warehouseLocation = temp.resolve("hadoop").resolve("warehouse").toString();
     setCustomCatalogProperties(defaultCatalogName, warehouseLocation);
@@ -95,7 +95,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testCreateDropTableToLocation() throws IOException {
+  public void createDropTableToLocation() throws IOException {
     Properties missingSchema = new Properties();
     missingSchema.put("location", temp.resolve("hadoop_tables").toString());
 
@@ -142,7 +142,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testCreateDropTableToCatalog() throws IOException {
+  public void createDropTableToCatalog() throws IOException {
     TableIdentifier identifier = TableIdentifier.of("test", "table");
     String defaultCatalogName = "default";
     String warehouseLocation = temp.resolve("hadoop").resolve("warehouse").toString();
@@ -196,7 +196,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadCatalogDefault() {
+  public void loadCatalogDefault() {
     String catalogName = "barCatalog";
     Optional<Catalog> defaultCatalog = Catalogs.loadCatalog(conf, catalogName);
     assertThat(defaultCatalog).isPresent();
@@ -207,7 +207,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadCatalogHive() {
+  public void loadCatalogHive() {
     String catalogName = "barCatalog";
     conf.set(
         InputFormatConfig.catalogPropertyConfigKey(catalogName, CatalogUtil.ICEBERG_CATALOG_TYPE),
@@ -221,7 +221,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadCatalogHadoop() {
+  public void loadCatalogHadoop() {
     String catalogName = "barCatalog";
     conf.set(
         InputFormatConfig.catalogPropertyConfigKey(catalogName, CatalogUtil.ICEBERG_CATALOG_TYPE),
@@ -241,7 +241,7 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadCatalogCustom() {
+  public void loadCatalogCustom() {
     String catalogName = "barCatalog";
     conf.set(
         InputFormatConfig.catalogPropertyConfigKey(catalogName, CatalogProperties.CATALOG_IMPL),
@@ -259,12 +259,12 @@ public class TestCatalogs {
   }
 
   @Test
-  public void testLoadCatalogLocation() {
+  public void loadCatalogLocation() {
     assertThat(Catalogs.loadCatalog(conf, Catalogs.ICEBERG_HADOOP_TABLE_NAME)).isNotPresent();
   }
 
   @Test
-  public void testLoadCatalogUnknown() {
+  public void loadCatalogUnknown() {
     String catalogName = "barCatalog";
     conf.set(
         InputFormatConfig.catalogPropertyConfigKey(catalogName, CatalogUtil.ICEBERG_CATALOG_TYPE),
