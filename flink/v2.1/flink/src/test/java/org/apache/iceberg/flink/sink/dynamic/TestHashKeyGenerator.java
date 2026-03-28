@@ -49,7 +49,7 @@ class TestHashKeyGenerator {
   private static final TableIdentifier TABLE_IDENTIFIER = TableIdentifier.of("default", "table");
 
   @Test
-  void testRoundRobinWithDistributionModeNone() throws Exception {
+  void roundRobinWithDistributionModeNone() throws Exception {
     int writeParallelism = 10;
     int maxWriteParallelism = 2;
     HashKeyGenerator generator = new HashKeyGenerator(1, maxWriteParallelism);
@@ -80,7 +80,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testBucketingWithDistributionModeHash() throws Exception {
+  void bucketingWithDistributionModeHash() throws Exception {
     int writeParallelism = 3;
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(1, maxWriteParallelism);
@@ -115,7 +115,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testEqualityKeys() throws Exception {
+  void equalityKeys() throws Exception {
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
@@ -160,7 +160,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testHashModeWithPartitionFieldAndEqualityField() throws Exception {
+  void hashModeWithPartitionFieldAndEqualityField() throws Exception {
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
@@ -181,7 +181,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testHashModeWithPartitionFieldNotInEqualityFieldsFails() {
+  void hashModeWithPartitionFieldNotInEqualityFieldsFails() {
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
@@ -202,7 +202,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testFailOnNonPositiveWriteParallelism() {
+  void failOnNonPositiveWriteParallelism() {
     final int maxWriteParallelism = 5;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
 
@@ -230,7 +230,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testCapAtMaxWriteParallelism() throws Exception {
+  void capAtMaxWriteParallelism() throws Exception {
     int writeParallelism = 10;
     int maxWriteParallelism = 5;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
@@ -259,7 +259,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testHashModeWithoutEqualityFieldsFallsBackToNone() throws Exception {
+  void hashModeWithoutEqualityFieldsFallsBackToNone() throws Exception {
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(16, maxWriteParallelism);
@@ -288,7 +288,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testSchemaSpecOverrides() throws Exception {
+  void schemaSpecOverrides() throws Exception {
     int maxCacheSize = 10;
     int writeParallelism = 5;
     int maxWriteParallelism = 10;
@@ -324,7 +324,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testMultipleTables() throws Exception {
+  void multipleTables() throws Exception {
     int maxCacheSize = 10;
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
@@ -369,7 +369,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testCaching() throws Exception {
+  void caching() throws Exception {
     int maxCacheSize = 1;
     int writeParallelism = 2;
     int maxWriteParallelism = 8;
@@ -402,7 +402,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testCacheMissOnWriteParallelismChange() throws Exception {
+  void cacheMissOnWriteParallelismChange() throws Exception {
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(10, maxWriteParallelism);
     Map<HashKeyGenerator.SelectorKey, KeySelector<RowData, Integer>> keySelectorCache =
@@ -436,7 +436,7 @@ class TestHashKeyGenerator {
   }
 
   @Test
-  void testCacheMissOnDistributionModeChange() throws Exception {
+  void cacheMissOnDistributionModeChange() throws Exception {
     int maxWriteParallelism = 8;
     HashKeyGenerator generator = new HashKeyGenerator(10, maxWriteParallelism);
     Map<HashKeyGenerator.SelectorKey, KeySelector<RowData, Integer>> keySelectorCache =

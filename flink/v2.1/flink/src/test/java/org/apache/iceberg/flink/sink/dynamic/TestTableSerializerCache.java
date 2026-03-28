@@ -55,7 +55,7 @@ class TestTableSerializerCache {
   TableSerializerCache cache = new TableSerializerCache(CATALOG_EXTENSION.catalogLoader(), 10);
 
   @Test
-  void testFullSchemaCaching() {
+  void fullSchemaCaching() {
     Supplier<RowDataSerializer> creator1a =
         () -> cache.serializer("table", schema1, PartitionSpec.unpartitioned());
     Supplier<RowDataSerializer> creator1b =
@@ -74,7 +74,7 @@ class TestTableSerializerCache {
   }
 
   @Test
-  void testCachingWithSchemaLookup() {
+  void cachingWithSchemaLookup() {
     CatalogLoader catalogLoader = CATALOG_EXTENSION.catalogLoader();
     cache = new TableSerializerCache(catalogLoader, 10);
 
@@ -99,7 +99,7 @@ class TestTableSerializerCache {
   }
 
   @Test
-  void testCacheEviction() {
+  void cacheEviction() {
     cache = new TableSerializerCache(CATALOG_EXTENSION.catalogLoader(), 0);
     assertThat(cache.maximumSize()).isEqualTo(0);
 
@@ -117,7 +117,7 @@ class TestTableSerializerCache {
   }
 
   @Test
-  void testCacheSize() {
+  void cacheSize() {
     cache = new TableSerializerCache(CATALOG_EXTENSION.catalogLoader(), 1000);
     assertThat(cache.maximumSize()).isEqualTo(1000);
   }

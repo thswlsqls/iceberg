@@ -40,7 +40,7 @@ class TestDynamicCommittableSerializer {
           5);
 
   @Test
-  void testV1() throws IOException {
+  void v1() throws IOException {
     var committable =
         new DynamicCommittable(
             new TableKey("table", "branch"),
@@ -53,14 +53,14 @@ class TestDynamicCommittableSerializer {
   }
 
   @Test
-  void testLatestVersion() throws IOException {
+  void latestVersion() throws IOException {
     DynamicCommittableSerializer serializer = new DynamicCommittableSerializer();
     assertThat(serializer.deserialize(serializer.getVersion(), serializer.serialize(COMMITTABLE)))
         .isEqualTo(COMMITTABLE);
   }
 
   @Test
-  void testUnsupportedVersion() {
+  void unsupportedVersion() {
     DynamicCommittableSerializer serializer = new DynamicCommittableSerializer();
     assertThatThrownBy(() -> serializer.deserialize(-1, serializer.serialize(COMMITTABLE)))
         .hasMessage("Unrecognized version or corrupt state: -1")

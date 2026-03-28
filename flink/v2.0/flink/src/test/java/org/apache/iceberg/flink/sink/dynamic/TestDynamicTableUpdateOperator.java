@@ -56,7 +56,7 @@ class TestDynamicTableUpdateOperator {
           Types.NestedField.optional(2, "data", Types.StringType.get()));
 
   @Test
-  void testDynamicTableUpdateOperatorNewTable() throws Exception {
+  void dynamicTableUpdateOperatorNewTable() throws Exception {
     int cacheMaximumSize = 10;
     int cacheRefreshMs = 1000;
     int inputSchemaCacheMaximumSize = 10;
@@ -92,7 +92,7 @@ class TestDynamicTableUpdateOperator {
   }
 
   @Test
-  void testDynamicTableUpdateOperatorSchemaChange() throws Exception {
+  void dynamicTableUpdateOperatorSchemaChange() throws Exception {
     int cacheMaximumSize = 10;
     int cacheRefreshMs = 1000;
     int inputSchemaCacheMaximumSize = 10;
@@ -134,7 +134,7 @@ class TestDynamicTableUpdateOperator {
 
   @ParameterizedTest
   @ValueSource(booleans = {true, false})
-  void testCaseInSensitivity(boolean caseSensitive) throws Exception {
+  void caseInSensitivity(boolean caseSensitive) throws Exception {
     int cacheMaximumSize = 10;
     int cacheRefreshMs = 1000;
     int inputSchemaCacheMaximumSize = 10;
@@ -186,7 +186,7 @@ class TestDynamicTableUpdateOperator {
   }
 
   @Test
-  void testDynamicTableUpdateOperatorPreserveUnusedColumns() throws Exception {
+  void dynamicTableUpdateOperatorPreserveUnusedColumns() throws Exception {
     int cacheMaximumSize = 10;
     int cacheRefreshMs = 1000;
     int inputSchemaCacheMaximumSize = 10;
@@ -227,7 +227,7 @@ class TestDynamicTableUpdateOperator {
   }
 
   @Test
-  void testDynamicTableUpdateOperatorDropUnusedColumns() throws Exception {
+  void dynamicTableUpdateOperatorDropUnusedColumns() throws Exception {
     int cacheMaximumSize = 10;
     int cacheRefreshMs = 1000;
     int inputSchemaCacheMaximumSize = 10;

@@ -221,7 +221,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testWrite() throws Exception {
+  void write() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -239,7 +239,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testWritePartitioned() throws Exception {
+  void writePartitioned() throws Exception {
     PartitionSpec spec = PartitionSpec.builderFor(SimpleDataUtil.SCHEMA).bucket("id", 10).build();
 
     List<DynamicIcebergDataImpl> rows =
@@ -254,7 +254,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testWritePartitionedAdjustSchemaIdsInSpec() throws Exception {
+  void writePartitionedAdjustSchemaIdsInSpec() throws Exception {
     Schema schema =
         new Schema(
             // Use zero-based schema field ids
@@ -281,7 +281,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testSchemaEvolutionFieldOrderChanges() throws Exception {
+  void schemaEvolutionFieldOrderChanges() throws Exception {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -346,7 +346,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testMultipleTables() throws Exception {
+  void multipleTables() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -364,7 +364,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testMultipleTablesPartitioned() throws Exception {
+  void multipleTablesPartitioned() throws Exception {
     PartitionSpec spec = PartitionSpec.builderFor(SimpleDataUtil.SCHEMA).bucket("id", 10).build();
 
     List<DynamicIcebergDataImpl> rows =
@@ -376,7 +376,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testSchemaEvolutionAddField() throws Exception {
+  void schemaEvolutionAddField() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -394,7 +394,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testRowEvolutionNullMissingOptionalField() throws Exception {
+  void rowEvolutionNullMissingOptionalField() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -412,7 +412,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testRowEvolutionMakeMissingRequiredFieldOptional() throws Exception {
+  void rowEvolutionMakeMissingRequiredFieldOptional() throws Exception {
     Schema existingSchemaWithRequiredField =
         new Schema(
             Types.NestedField.optional(1, "id", Types.IntegerType.get()),
@@ -438,7 +438,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testSchemaEvolutionNonBackwardsCompatible() throws Exception {
+  void schemaEvolutionNonBackwardsCompatible() throws Exception {
     Schema initialSchema = new Schema(Types.NestedField.required(1, "id", Types.IntegerType.get()));
     // Type change is not allowed
     Schema erroringSchema = new Schema(Types.NestedField.required(1, "id", Types.StringType.get()));
@@ -462,7 +462,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testPartitionSpecEvolution() throws Exception {
+  void partitionSpecEvolution() throws Exception {
     PartitionSpec spec1 = PartitionSpec.builderFor(SimpleDataUtil.SCHEMA).bucket("id", 10).build();
     PartitionSpec spec2 =
         PartitionSpec.builderFor(SimpleDataUtil.SCHEMA).bucket("id", 5).identity("data").build();
@@ -511,7 +511,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testMultipleBranches() throws Exception {
+  void multipleBranches() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -526,7 +526,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testWriteMultipleTablesWithSchemaChanges() throws Exception {
+  void writeMultipleTablesWithSchemaChanges() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             new DynamicIcebergDataImpl(
@@ -579,7 +579,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testUpsert() throws Exception {
+  void upsert() throws Exception {
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
             // Insert one rows
@@ -638,7 +638,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testUpsertV3() throws Exception {
+  void upsertV3() throws Exception {
     ImmutableMap<String, String> properties = ImmutableMap.of(TableProperties.FORMAT_VERSION, "3");
     CATALOG_EXTENSION
         .catalog()
@@ -706,7 +706,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testMultiFormatVersion() throws Exception {
+  void multiFormatVersion() throws Exception {
     ImmutableMap<String, String> properties = ImmutableMap.of(TableProperties.FORMAT_VERSION, "3");
     CATALOG_EXTENSION
         .catalog()
@@ -841,7 +841,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCommitFailedBeforeOrAfterCommit() throws Exception {
+  void commitFailedBeforeOrAfterCommit() throws Exception {
     // Configure a Restart strategy to allow recovery
     Configuration configuration = new Configuration();
     configuration.set(RestartStrategyOptions.RESTART_STRATEGY, "fixed-delay");
@@ -878,7 +878,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCommitConcurrency() throws Exception {
+  void commitConcurrency() throws Exception {
 
     List<DynamicIcebergDataImpl> rows =
         Lists.newArrayList(
@@ -904,7 +904,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
 
   @ParameterizedTest
   @ValueSource(booleans = {false, true})
-  void testCommitsOnceWhenConcurrentDuplicateCommit(boolean overwriteMode) throws Exception {
+  void commitsOnceWhenConcurrentDuplicateCommit(boolean overwriteMode) throws Exception {
     TableIdentifier tableId = TableIdentifier.of(DATABASE, "t1");
     List<DynamicIcebergDataImpl> records =
         Lists.newArrayList(
@@ -949,7 +949,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCommitsOncePerTableBranchAndCheckpoint() throws Exception {
+  void commitsOncePerTableBranchAndCheckpoint() throws Exception {
     String tableName = "t1";
     String branch = SnapshotRef.MAIN_BRANCH;
     PartitionSpec spec1 = PartitionSpec.unpartitioned();
@@ -1021,7 +1021,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testOptInDropUnusedColumns() throws Exception {
+  void optInDropUnusedColumns() throws Exception {
     Schema schema1 =
         new Schema(
             Types.NestedField.required(1, "id", Types.IntegerType.get()),
@@ -1072,7 +1072,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCaseInsensitiveSchemaMatching() throws Exception {
+  void caseInsensitiveSchemaMatching() throws Exception {
     Schema lowerCaseSchema =
         new Schema(
             Types.NestedField.optional(1, "id", Types.IntegerType.get()),
@@ -1115,7 +1115,7 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCaseSensitiveSchemaMatchingCreatesNewFields() throws Exception {
+  void caseSensitiveSchemaMatchingCreatesNewFields() throws Exception {
     Schema lowerCaseSchema =
         new Schema(
             Types.NestedField.optional(1, "id", Types.IntegerType.get()),
@@ -1157,14 +1157,14 @@ class TestDynamicIcebergSink extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testOperatorUidsAreDeterministic() {
+  void operatorUidsAreDeterministic() {
     assertThat(createSinkAndReturnUIds("test")).isEqualTo(createSinkAndReturnUIds("test"));
     assertThat(createSinkAndReturnUIds("test"))
         .doesNotContainAnyElementsOf(createSinkAndReturnUIds("test2"));
   }
 
   @Test
-  void testOperatorUidsFormat() {
+  void operatorUidsFormat() {
     Set<String> sinkUids = createSinkAndReturnUIds("test");
     // These look odd, but we need to keep the UIDs consistent. We had a bug where the UID of the
     // pre commit topology was off, but since it is stateless, users will still be able to restore

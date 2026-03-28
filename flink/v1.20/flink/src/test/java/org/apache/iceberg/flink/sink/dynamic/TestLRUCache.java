@@ -30,7 +30,7 @@ class TestLRUCache {
   private static final Consumer<Map.Entry<Integer, Integer>> NO_OP_CALLBACK = ignored -> {};
 
   @Test
-  void testPut() {
+  void put() {
     LRUCache<Integer, Integer> cache = new LRUCache<>(1, NO_OP_CALLBACK);
     cache.put(1, 1);
 
@@ -38,7 +38,7 @@ class TestLRUCache {
   }
 
   @Test
-  void testGet() {
+  void get() {
     LRUCache<Integer, Integer> cache = new LRUCache<>(1, NO_OP_CALLBACK);
     cache.put(1, 123);
 
@@ -47,7 +47,7 @@ class TestLRUCache {
   }
 
   @Test
-  void testElementEviction() {
+  void elementEviction() {
     int maxSize = 2;
     LRUCache<Integer, Integer> cache = new LRUCache<>(maxSize, NO_OP_CALLBACK);
 
@@ -62,7 +62,7 @@ class TestLRUCache {
   }
 
   @Test
-  void testEvictionCallback() {
+  void evictionCallback() {
     int maxSize = 2;
     TestEvictionCallback callback = new TestEvictionCallback();
     LRUCache<Integer, Integer> cache = new LRUCache<>(maxSize, callback);

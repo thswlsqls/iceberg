@@ -52,7 +52,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   private static final TableIdentifier TABLE2 = TableIdentifier.of("myTable2");
 
   @Test
-  void testDynamicWriter() throws Exception {
+  void dynamicWriter() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 = catalog.createTable(TABLE1, SimpleDataUtil.SCHEMA);
     Table table2 = catalog.createTable(TABLE2, SimpleDataUtil.SCHEMA);
@@ -120,7 +120,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testDynamicWriterPropertiesDefault() throws Exception {
+  void dynamicWriterPropertiesDefault() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 =
         catalog.createTable(
@@ -142,7 +142,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testFlinkConfigOverridesTableProperties() throws Exception {
+  void flinkConfigOverridesTableProperties() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 =
         catalog.createTable(
@@ -173,7 +173,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testWritePropertiesOverrideFlinkConfig() throws Exception {
+  void writePropertiesOverrideFlinkConfig() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 = catalog.createTable(TABLE1, SimpleDataUtil.SCHEMA);
 
@@ -199,7 +199,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testFlinkConfigFileFormat() throws Exception {
+  void flinkConfigFileFormat() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 = catalog.createTable(TABLE1, SimpleDataUtil.SCHEMA);
 
@@ -228,7 +228,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testFlinkConfigTargetFileSize() throws Exception {
+  void flinkConfigTargetFileSize() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 = catalog.createTable(TABLE1, SimpleDataUtil.SCHEMA);
 
@@ -255,7 +255,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testDynamicWriterUpsert() throws Exception {
+  void dynamicWriterUpsert() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     DynamicWriter dyamicWriter = createDynamicWriter(catalog);
     Table table1 = CATALOG_EXTENSION.catalog().createTable(TABLE1, SimpleDataUtil.SCHEMA);
@@ -280,7 +280,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testDynamicWriterUpsertNoEqualityFields() {
+  void dynamicWriterUpsertNoEqualityFields() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     DynamicWriter dyamicWriter = createDynamicWriter(catalog);
     Table table1 = CATALOG_EXTENSION.catalog().createTable(TABLE1, SimpleDataUtil.SCHEMA);
@@ -295,7 +295,7 @@ class TestDynamicWriter extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testUniqueFileSuffixOnFactoryRecreation() throws Exception {
+  void uniqueFileSuffixOnFactoryRecreation() throws Exception {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     Table table1 = catalog.createTable(TABLE1, SimpleDataUtil.SCHEMA);
 

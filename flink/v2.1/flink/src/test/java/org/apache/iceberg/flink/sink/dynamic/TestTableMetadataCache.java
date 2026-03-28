@@ -64,7 +64,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
           Types.NestedField.optional(2, "Data", Types.StringType.get()));
 
   @Test
-  void testCaching() {
+  void caching() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -86,7 +86,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCacheInvalidationAfterSchemaChange() {
+  void cacheInvalidationAfterSchemaChange() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -111,7 +111,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCachingDisabled() {
+  void cachingDisabled() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -122,7 +122,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testNoCacheRefreshingBeforeRefreshIntervalElapses() {
+  void noCacheRefreshingBeforeRefreshIntervalElapses() {
     // Create table
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
@@ -157,7 +157,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testNoSuchNamespaceExceptionHandling() {
+  void noSuchNamespaceExceptionHandling() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.of("nonexistent_namespace", "myTable");
     TableMetadataCache cache =
@@ -170,7 +170,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testNoSuchTableExceptionHandling() {
+  void noSuchTableExceptionHandling() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.nonexistent_table");
     TableMetadataCache cache =
@@ -183,7 +183,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCaseInsensitiveCaching() {
+  void caseInsensitiveCaching() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -201,7 +201,7 @@ public class TestTableMetadataCache extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testCaseSensitiveCachingDoesNotMatch() {
+  void caseSensitiveCachingDoesNotMatch() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);

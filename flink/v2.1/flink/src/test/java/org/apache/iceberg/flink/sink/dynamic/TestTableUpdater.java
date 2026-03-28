@@ -59,7 +59,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
           Types.NestedField.optional(3, "extra", Types.StringType.get()));
 
   @Test
-  void testTableCreation(@TempDir Path tempDir) {
+  void tableCreation(@TempDir Path tempDir) {
     // Location for tables is not configurable for hadoop catalogs
     InMemoryCatalog catalog = new InMemoryCatalog();
     catalog.initialize("catalog", Map.of());
@@ -89,7 +89,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testTableAlreadyExists() {
+  void tableAlreadyExists() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("myTable");
     TableMetadataCache cache =
@@ -114,7 +114,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testBranchCreationAndCaching() {
+  void branchCreationAndCaching() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("myTable");
     TableMetadataCache cache =
@@ -133,7 +133,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testSpecCreation() {
+  void specCreation() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("myTable");
     TableMetadataCache cache =
@@ -150,7 +150,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testInvalidateOldCacheEntryOnUpdate() {
+  void invalidateOldCacheEntryOnUpdate() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -175,7 +175,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testLastResultInvalidation() {
+  void lastResultInvalidation() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("default.myTable");
     catalog.createTable(tableIdentifier, SCHEMA);
@@ -218,7 +218,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
 
   @ParameterizedTest
   @ValueSource(booleans = {true, false})
-  void testCaseSensitivity(boolean caseSensitive) {
+  void caseSensitivity(boolean caseSensitive) {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("myTable");
     TableMetadataCache cache =
@@ -262,7 +262,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testDropUnusedColumns() {
+  void dropUnusedColumns() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     TableIdentifier tableIdentifier = TableIdentifier.parse("myTable");
     TableMetadataCache cache =
@@ -289,7 +289,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testNamespaceAndTableCreation() {
+  void namespaceAndTableCreation() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     SupportsNamespaces namespaceCatalog = (SupportsNamespaces) catalog;
     TableIdentifier tableIdentifier = TableIdentifier.of("new_namespace", "myTable");
@@ -316,7 +316,7 @@ public class TestTableUpdater extends TestFlinkIcebergSinkBase {
   }
 
   @Test
-  void testTableCreationWithExistingNamespace() {
+  void tableCreationWithExistingNamespace() {
     Catalog catalog = CATALOG_EXTENSION.catalog();
     SupportsNamespaces namespaceCatalog = (SupportsNamespaces) catalog;
     Namespace namespace = Namespace.of("existing_namespace");

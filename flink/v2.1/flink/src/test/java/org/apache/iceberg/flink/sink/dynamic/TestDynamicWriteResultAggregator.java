@@ -59,7 +59,7 @@ class TestDynamicWriteResultAggregator {
           .build();
 
   @Test
-  void testAggregatesWriteResultsForTwoTables() throws Exception {
+  void aggregatesWriteResultsForTwoTables() throws Exception {
     CATALOG_EXTENSION.catalog().createTable(TableIdentifier.of("table"), new Schema());
     CATALOG_EXTENSION.catalog().createTable(TableIdentifier.of("table2"), new Schema());
 
@@ -101,7 +101,7 @@ class TestDynamicWriteResultAggregator {
   }
 
   @Test
-  void testPreventOutputFileFactoryCacheEvictionDuringFlush() throws Exception {
+  void preventOutputFileFactoryCacheEvictionDuringFlush() throws Exception {
     CATALOG_EXTENSION.catalog().createTable(TableIdentifier.of("table"), new Schema());
 
     // Disable caching of ManifestOutputFileFactory.
@@ -150,7 +150,7 @@ class TestDynamicWriteResultAggregator {
   }
 
   @Test
-  void testAggregatesWriteResultsForOneTable() throws Exception {
+  void aggregatesWriteResultsForOneTable() throws Exception {
     CATALOG_EXTENSION.catalog().createTable(TableIdentifier.of("table"), new Schema());
     CATALOG_EXTENSION.catalog().createTable(TableIdentifier.of("table2"), new Schema());
 

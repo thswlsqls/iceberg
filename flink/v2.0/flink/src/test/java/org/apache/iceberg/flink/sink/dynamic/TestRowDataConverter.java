@@ -57,7 +57,7 @@ class TestRowDataConverter {
           Types.NestedField.optional(3, "onemore", Types.DoubleType.get()));
 
   @Test
-  void testPrimitiveTypes() {
+  void primitiveTypes() {
     DataGenerator generator = new DataGenerators.Primitives();
     assertThat(
             convert(
@@ -68,13 +68,13 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testAddColumn() {
+  void addColumn() {
     assertThat(convert(SimpleDataUtil.createRowData(1, "a"), SCHEMA, SCHEMA2))
         .isEqualTo(GenericRowData.of(1, StringData.fromString("a"), null));
   }
 
   @Test
-  void testAddRequiredColumn() {
+  void addRequiredColumn() {
     Schema currentSchema = new Schema(Types.NestedField.optional(1, "id", Types.IntegerType.get()));
     Schema targetSchema =
         new Schema(
@@ -87,7 +87,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testIntToLong() {
+  void intToLong() {
     Schema schemaWithLong =
         new Schema(
             Types.NestedField.optional(2, "id", Types.LongType.get()),
@@ -98,7 +98,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testFloatToDouble() {
+  void floatToDouble() {
     Schema schemaWithFloat =
         new Schema(Types.NestedField.optional(1, "float2double", Types.FloatType.get()));
     Schema schemaWithDouble =
@@ -109,7 +109,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testDateToTimestamp() {
+  void dateToTimestamp() {
     Schema schemaWithFloat =
         new Schema(Types.NestedField.optional(1, "date2timestamp", Types.DateType.get()));
     Schema schemaWithDouble =
@@ -125,7 +125,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testIncreasePrecision() {
+  void increasePrecision() {
     Schema before =
         new Schema(Types.NestedField.required(14, "decimal_field", Types.DecimalType.of(9, 2)));
     Schema after =
@@ -140,7 +140,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testStructAddOptionalFields() {
+  void structAddOptionalFields() {
     DataGenerator generator = new DataGenerators.StructOfPrimitive();
     RowData oldData = generator.generateFlinkRowData();
     Schema oldSchema = generator.icebergSchema();
@@ -164,7 +164,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testStructAddRequiredFieldsWithOptionalRoot() {
+  void structAddRequiredFieldsWithOptionalRoot() {
     DataGenerator generator = new DataGenerators.StructOfPrimitive();
     RowData oldData = generator.generateFlinkRowData();
     Schema oldSchema = generator.icebergSchema();
@@ -191,7 +191,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testStructAddRequiredFields() {
+  void structAddRequiredFields() {
     DataGenerator generator = new DataGenerators.StructOfPrimitive();
     RowData oldData = generator.generateFlinkRowData();
     Schema oldSchema = generator.icebergSchema();
@@ -213,7 +213,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testMap() {
+  void map() {
     DataGenerator generator = new DataGenerators.MapOfPrimitives();
     RowData oldData = generator.generateFlinkRowData();
     Schema oldSchema = generator.icebergSchema();
@@ -236,7 +236,7 @@ class TestRowDataConverter {
   }
 
   @Test
-  void testArray() {
+  void array() {
     DataGenerator generator = new DataGenerators.ArrayOfPrimitive();
     RowData oldData = generator.generateFlinkRowData();
     Schema oldSchema = generator.icebergSchema();

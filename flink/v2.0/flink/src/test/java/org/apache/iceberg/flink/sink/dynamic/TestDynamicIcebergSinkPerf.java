@@ -168,7 +168,7 @@ class TestDynamicIcebergSinkPerf {
   }
 
   @Test
-  void testDynamicSink() throws Exception {
+  void dynamicSink() throws Exception {
     // So we make sure that the writer threads are the same for the 2 tests
     env.setMaxParallelism(PARALLELISM * TABLE_NUM * 2);
     env.setParallelism(PARALLELISM * TABLE_NUM * 2);
@@ -183,7 +183,7 @@ class TestDynamicIcebergSinkPerf {
   }
 
   @Test
-  void testIcebergSink() throws Exception {
+  void icebergSink() throws Exception {
     runTest(
         s -> {
           for (int i = 0; i < IDENTIFIERS.length; ++i) {

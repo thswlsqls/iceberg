@@ -95,7 +95,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddTopLevelPrimitives() {
+  public void addTopLevelPrimitives() {
     Schema targetSchema = new Schema(primitiveFields(0, primitiveTypes()));
     UpdateSchema updateApi = loadUpdateApi(new Schema());
     EvolveSchemaVisitor.visit(
@@ -104,7 +104,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testMakeTopLevelPrimitivesOptional() {
+  public void makeTopLevelPrimitivesOptional() {
     Schema existingSchema = new Schema(primitiveFields(0, primitiveTypes(), false));
     assertThat(existingSchema.columns().stream().allMatch(Types.NestedField::isRequired)).isTrue();
 
@@ -117,7 +117,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testDropUnusedColumns() {
+  public void dropUnusedColumns() {
     Schema existingSchema =
         new Schema(
             optional(1, "a", StringType.get()),
@@ -143,7 +143,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testPreserveUnusedColumns() {
+  public void preserveUnusedColumns() {
     Schema existingSchema =
         new Schema(
             optional(1, "a", StringType.get()),
@@ -166,7 +166,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testIdentifyFieldsByName() {
+  public void identifyFieldsByName() {
     Schema existingSchema =
         new Schema(Types.NestedField.optional(42, "myField", Types.LongType.get()));
     UpdateSchema updateApi = loadUpdateApi(existingSchema);
@@ -178,7 +178,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testChangeOrderTopLevelPrimitives() {
+  public void changeOrderTopLevelPrimitives() {
     Schema existingSchema =
         new Schema(
             Arrays.asList(optional(1, "a", StringType.get()), optional(2, "b", StringType.get())));
@@ -192,7 +192,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddTopLevelListOfPrimitives() {
+  public void addTopLevelListOfPrimitives() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema targetSchema = new Schema(optional(1, "aList", ListType.ofOptional(2, primitiveType)));
       UpdateSchema updateApi = loadUpdateApi(new Schema());
@@ -203,7 +203,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testMakeTopLevelListOfPrimitivesOptional() {
+  public void makeTopLevelListOfPrimitivesOptional() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema existingSchema =
           new Schema(optional(1, "aList", ListType.ofRequired(2, primitiveType)));
@@ -218,7 +218,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddTopLevelMapOfPrimitives() {
+  public void addTopLevelMapOfPrimitives() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema targetSchema =
           new Schema(optional(1, "aMap", MapType.ofOptional(2, 3, primitiveType, primitiveType)));
@@ -230,7 +230,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddTopLevelStructOfPrimitives() {
+  public void addTopLevelStructOfPrimitives() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema currentSchema =
           new Schema(
@@ -243,7 +243,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddNestedPrimitive() {
+  public void addNestedPrimitive() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema currentSchema = new Schema(optional(1, "aStruct", StructType.of()));
       Schema targetSchema =
@@ -257,7 +257,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testMakeNestedPrimitiveOptional() {
+  public void makeNestedPrimitiveOptional() {
     for (PrimitiveType primitiveType : primitiveTypes()) {
       Schema currentSchema =
           new Schema(
@@ -273,7 +273,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddNestedPrimitives() {
+  public void addNestedPrimitives() {
     Schema currentSchema = new Schema(optional(1, "aStruct", StructType.of()));
     Schema targetSchema =
         new Schema(optional(1, "aStruct", StructType.of(primitiveFields(1, primitiveTypes()))));
@@ -284,7 +284,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddNestedLists() {
+  public void addNestedLists() {
     Schema targetSchema =
         new Schema(
             optional(
@@ -315,7 +315,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddNestedStruct() {
+  public void addNestedStruct() {
     Schema currentSchema =
         new Schema(optional(1, "struct1", StructType.of(optional(2, "struct2", StructType.of()))));
     Schema targetSchema =
@@ -355,7 +355,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddNestedMaps() {
+  public void addNestedMaps() {
     Schema targetSchema =
         new Schema(
             optional(
@@ -391,7 +391,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testDetectInvalidTopLevelList() {
+  public void detectInvalidTopLevelList() {
     Schema currentSchema =
         new Schema(optional(1, "aList", ListType.ofOptional(2, StringType.get())));
     Schema targetSchema = new Schema(optional(1, "aList", ListType.ofOptional(2, LongType.get())));
@@ -409,7 +409,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testDetectInvalidTopLevelMapValue() {
+  public void detectInvalidTopLevelMapValue() {
 
     Schema currentSchema =
         new Schema(
@@ -431,7 +431,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testDetectInvalidTopLevelMapKey() {
+  public void detectInvalidTopLevelMapKey() {
     Schema currentSchema =
         new Schema(
             optional(1, "aMap", MapType.ofOptional(2, 3, StringType.get(), StringType.get())));
@@ -452,7 +452,7 @@ public class TestEvolveSchemaVisitor {
 
   @Test
   // int 32-bit signed integers -> Can promote to long
-  public void testTypePromoteIntegerToLong() {
+  public void typePromoteIntegerToLong() {
     Schema currentSchema = new Schema(required(1, "aCol", IntegerType.get()));
     Schema targetSchema = new Schema(required(1, "aCol", LongType.get()));
 
@@ -466,7 +466,7 @@ public class TestEvolveSchemaVisitor {
 
   @Test
   // float 32-bit IEEE 754 floating point -> Can promote to double
-  public void testTypePromoteFloatToDouble() {
+  public void typePromoteFloatToDouble() {
     Schema currentSchema = new Schema(required(1, "aCol", FloatType.get()));
     Schema targetSchema = new Schema(required(1, "aCol", DoubleType.get()));
 
@@ -479,7 +479,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testInvalidTypePromoteDoubleToFloat() {
+  public void invalidTypePromoteDoubleToFloat() {
     Schema currentSchema = new Schema(required(1, "aCol", DoubleType.get()));
     Schema targetSchema = new Schema(required(1, "aCol", FloatType.get()));
     assertThatThrownBy(
@@ -498,7 +498,7 @@ public class TestEvolveSchemaVisitor {
   @Test
   // decimal(P,S) Fixed-point decimal; precision P, scale S -> Scale is fixed [1], precision must be
   // 38 or less
-  public void testTypePromoteDecimalToFixedScaleWithWiderPrecision() {
+  public void typePromoteDecimalToFixedScaleWithWiderPrecision() {
     Schema currentSchema = new Schema(required(1, "aCol", DecimalType.of(20, 1)));
     Schema targetSchema = new Schema(required(1, "aCol", DecimalType.of(22, 1)));
 
@@ -509,7 +509,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAddPrimitiveToNestedStruct() {
+  public void addPrimitiveToNestedStruct() {
     Schema existingSchema =
         new Schema(
             required(
@@ -553,7 +553,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testReplaceListWithPrimitive() {
+  public void replaceListWithPrimitive() {
     Schema currentSchema =
         new Schema(optional(1, "aColumn", ListType.ofOptional(2, StringType.get())));
     Schema targetSchema = new Schema(optional(1, "aColumn", StringType.get()));
@@ -608,7 +608,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testAppendNestedStruct() {
+  public void appendNestedStruct() {
     Schema currentSchema =
         new Schema(
             required(
@@ -661,7 +661,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testMakeNestedStructOptional() {
+  public void makeNestedStructOptional() {
     Schema currentSchema = getNestedSchemaWithOptionalModifier(false);
     Schema targetSchema =
         new Schema(
@@ -715,7 +715,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testCaseInsensitiveAddField() {
+  public void caseInsensitiveAddField() {
     Schema existingSchema =
         new Schema(
             Types.NestedField.optional(1, "id", Types.IntegerType.get()),
@@ -735,7 +735,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testCaseInsensitiveMakeFieldOptional() {
+  public void caseInsensitiveMakeFieldOptional() {
     Schema existingSchema =
         new Schema(
             Types.NestedField.optional(1, "id", Types.IntegerType.get()),
@@ -750,7 +750,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testCaseInsensitiveNestedStructField() {
+  public void caseInsensitiveNestedStructField() {
     Schema existingSchema =
         new Schema(
             optional(1, "struct1", StructType.of(optional(2, "field1", Types.StringType.get()))));
@@ -773,7 +773,7 @@ public class TestEvolveSchemaVisitor {
   }
 
   @Test
-  public void testCaseSensitiveDoesNotMatch() {
+  public void caseSensitiveDoesNotMatch() {
     Schema existingSchema =
         new Schema(Types.NestedField.optional(1, "id", Types.IntegerType.get()));
     Schema targetSchema =

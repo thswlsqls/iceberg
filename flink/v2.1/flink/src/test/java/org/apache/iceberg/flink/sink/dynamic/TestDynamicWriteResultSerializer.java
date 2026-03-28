@@ -50,7 +50,7 @@ class TestDynamicWriteResultSerializer {
   private static final TableKey TABLE_KEY = new TableKey("table", "branch");
 
   @Test
-  void testRoundtrip() throws IOException {
+  void roundtrip() throws IOException {
     DynamicWriteResult dynamicWriteResult =
         new DynamicWriteResult(TABLE_KEY, 1, WriteResult.builder().addDataFiles(DATA_FILE).build());
 
@@ -66,7 +66,7 @@ class TestDynamicWriteResultSerializer {
   }
 
   @Test
-  void testUnsupportedVersion() {
+  void unsupportedVersion() {
     DynamicWriteResult dynamicWriteResult =
         new DynamicWriteResult(TABLE_KEY, 1, WriteResult.builder().addDataFiles(DATA_FILE).build());
 

@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 public class TestPartitionSpecEvolution {
 
   @Test
-  void testCompatible() {
+  void compatible() {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -42,7 +42,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testNotCompatibleDifferentTransform() {
+  void notCompatibleDifferentTransform() {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -56,7 +56,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testNotCompatibleMoreFields() {
+  void notCompatibleMoreFields() {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -71,7 +71,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testCompatibleWithNonMatchingSourceIds() {
+  void compatibleWithNonMatchingSourceIds() {
     Schema schema1 =
         new Schema(
             // Use zero-based field ids
@@ -93,7 +93,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testPartitionSpecEvolution() {
+  void partitionSpecEvolution() {
     Schema schema1 =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -118,7 +118,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testPartitionSpecEvolutionAddField() {
+  void partitionSpecEvolutionAddField() {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -137,7 +137,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testPartitionSpecEvolutionRemoveField() {
+  void partitionSpecEvolutionRemoveField() {
     Schema schema =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),
@@ -156,7 +156,7 @@ public class TestPartitionSpecEvolution {
   }
 
   @Test
-  void testPartitionSpecEvolutionWithNestedFields() {
+  void partitionSpecEvolutionWithNestedFields() {
     Schema schema1 =
         new Schema(
             Types.NestedField.required(0, "id", Types.IntegerType.get()),

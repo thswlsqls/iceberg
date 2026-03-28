@@ -35,7 +35,7 @@ public class TestDynamicRecordInternalSerializer {
   static final HadoopCatalogExtension CATALOG_EXTENSION = new HadoopCatalogExtension("db", "table");
 
   @Test
-  void testCurrentTypeSerializerSnapshotVersion() {
+  void currentTypeSerializerSnapshotVersion() {
     TypeSerializer<DynamicRecordInternal> serializer = createSerializer();
     assertThat(serializer).isNotNull().isInstanceOf(DynamicRecordInternalSerializer.class);
     TypeSerializerSnapshot<DynamicRecordInternal> snapshot = serializer.snapshotConfiguration();
@@ -43,7 +43,7 @@ public class TestDynamicRecordInternalSerializer {
   }
 
   @Test
-  void testCurrentTypeSerializerSnapshotCompatibility() {
+  void currentTypeSerializerSnapshotCompatibility() {
     TypeSerializer<DynamicRecordInternal> serializer = createSerializer();
     assertThat(serializer).isNotNull().isInstanceOf(DynamicRecordInternalSerializer.class);
     TypeSerializerSnapshot<DynamicRecordInternal> snapshot = serializer.snapshotConfiguration();
@@ -55,7 +55,7 @@ public class TestDynamicRecordInternalSerializer {
   }
 
   @Test
-  void testRestoreFromOldVersion() throws IOException {
+  void restoreFromOldVersion() throws IOException {
     // Create a serialized snapshot of the TypeSerializer
     final int oldVersion = 0;
     OldTypeSerializerSnapshot oldTypeSerializerSnapshot = new OldTypeSerializerSnapshot(oldVersion);

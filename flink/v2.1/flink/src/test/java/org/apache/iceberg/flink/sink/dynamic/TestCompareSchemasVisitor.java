@@ -40,7 +40,7 @@ class TestCompareSchemasVisitor {
   private static final boolean PRESERVE_COLUMNS = false;
 
   @Test
-  void testSchema() {
+  void schema() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -57,7 +57,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testSchemaDifferentId() {
+  void schemaDifferentId() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -74,7 +74,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testSchemaDifferent() {
+  void schemaDifferent() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -89,7 +89,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testSchemaWithMoreColumns() {
+  void schemaWithMoreColumns() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -104,7 +104,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testDifferentType() {
+  void differentType() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -117,7 +117,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testCompatibleType() {
+  void compatibleType() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -130,7 +130,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testRequiredChangeForMatchingField() {
+  void requiredChangeForMatchingField() {
     Schema dataSchema =
         new Schema(optional(1, "id", IntegerType.get()), optional(2, "extra", StringType.get()));
     Schema tableSchema =
@@ -144,7 +144,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testRequiredChangeForNonMatchingField() {
+  void requiredChangeForNonMatchingField() {
     Schema dataSchema = new Schema(optional(1, "id", IntegerType.get()));
     Schema tableSchema =
         new Schema(optional(1, "id", IntegerType.get()), required(2, "extra", StringType.get()));
@@ -157,7 +157,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testNoRequiredChangeForNonMatchingField() {
+  void noRequiredChangeForNonMatchingField() {
     Schema dataSchema = new Schema(required(1, "id", IntegerType.get()));
     Schema tableSchema =
         new Schema(required(1, "id", IntegerType.get()), optional(2, "extra", StringType.get()));
@@ -167,7 +167,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testStructDifferentId() {
+  void structDifferentId() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -182,7 +182,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testStructChanged() {
+  void structChanged() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -197,7 +197,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testMapDifferentId() {
+  void mapDifferentId() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -214,7 +214,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testMapChanged() {
+  void mapChanged() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -231,7 +231,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testListDifferentId() {
+  void listDifferentId() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -246,7 +246,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testListChanged() {
+  void listChanged() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -261,7 +261,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testCaseInsensitiveFieldMatching() {
+  void caseInsensitiveFieldMatching() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -278,7 +278,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testCaseSensitiveFieldMatchingDefault() {
+  void caseSensitiveFieldMatchingDefault() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -295,7 +295,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testCaseInsensitiveNestedStruct() {
+  void caseInsensitiveNestedStruct() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -310,7 +310,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testCaseInsensitiveWithMoreColumns() {
+  void caseInsensitiveWithMoreColumns() {
     assertThat(
             CompareSchemasVisitor.visit(
                 new Schema(
@@ -325,7 +325,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testDropUnusedColumnsEnabled() {
+  void dropUnusedColumnsEnabled() {
     Schema dataSchema = new Schema(optional(1, "id", IntegerType.get()));
     Schema tableSchema =
         new Schema(
@@ -338,7 +338,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testDropUnusedColumnsWithRequiredField() {
+  void dropUnusedColumnsWithRequiredField() {
     Schema dataSchema = new Schema(optional(1, "id", IntegerType.get()));
     Schema tableSchema =
         new Schema(optional(1, "id", IntegerType.get()), required(2, "data", StringType.get()));
@@ -348,7 +348,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testDropUnusedColumnsWhenInputHasMoreFields() {
+  void dropUnusedColumnsWhenInputHasMoreFields() {
     Schema dataSchema =
         new Schema(
             optional(1, "id", IntegerType.get()),
@@ -361,7 +361,7 @@ class TestCompareSchemasVisitor {
   }
 
   @Test
-  void testDropUnusedColumnsInNestedStruct() {
+  void dropUnusedColumnsInNestedStruct() {
     Schema dataSchema =
         new Schema(
             optional(1, "id", IntegerType.get()),

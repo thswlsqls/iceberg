@@ -145,7 +145,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testCommit() throws Exception {
+  void commit() throws Exception {
     Table table1 = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table1.snapshots()).isEmpty();
     Table table2 = catalog.loadTable(TableIdentifier.of(TABLE2));
@@ -259,7 +259,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testSkipsCommitRequestsForPreviousCheckpoints() throws Exception {
+  void skipsCommitRequestsForPreviousCheckpoints() throws Exception {
     Table table1 = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table1.snapshots()).isEmpty();
 
@@ -327,7 +327,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testCommitDeleteInDifferentFormatVersion() throws Exception {
+  void commitDeleteInDifferentFormatVersion() throws Exception {
     Table table1 = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table1.snapshots()).isEmpty();
 
@@ -386,7 +386,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testCommitOnlyDataInDifferentFormatVersion() throws Exception {
+  void commitOnlyDataInDifferentFormatVersion() throws Exception {
     Table table1 = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table1.snapshots()).isEmpty();
 
@@ -453,7 +453,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testTableBranchAtomicCommitForAppendOnlyData() throws Exception {
+  void tableBranchAtomicCommitForAppendOnlyData() throws Exception {
     Table table = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table.snapshots()).isEmpty();
 
@@ -552,7 +552,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testTableBranchAtomicCommitWithFailures() throws Exception {
+  void tableBranchAtomicCommitWithFailures() throws Exception {
     Table table = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table.snapshots()).isEmpty();
 
@@ -697,7 +697,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testCommitDeltaTxnWithAppendFiles() throws Exception {
+  void commitDeltaTxnWithAppendFiles() throws Exception {
     Table table = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table.snapshots()).isEmpty();
 
@@ -750,7 +750,7 @@ class TestDynamicCommitter {
   }
 
   @Test
-  void testReplacePartitions() throws Exception {
+  void replacePartitions() throws Exception {
     Table table1 = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table1.snapshots()).isEmpty();
 
@@ -824,7 +824,7 @@ class TestDynamicCommitter {
 
   @ParameterizedTest
   @ValueSource(booleans = {false, true})
-  void testThrowsValidationExceptionOnDuplicateCommit(boolean overwriteMode) throws Exception {
+  void throwsValidationExceptionOnDuplicateCommit(boolean overwriteMode) throws Exception {
     Table table = catalog.loadTable(TableIdentifier.of(TABLE1));
     assertThat(table.snapshots()).isEmpty();
 
