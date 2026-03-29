@@ -76,6 +76,10 @@ public class TestSnowflakeCatalog {
         SnowflakeIdentifier.ofTable("DB_3", "SCHEMA_4", "TAB_6"),
         SnowflakeTableMetadata.parseJson(
             "{\"metadataLocation\":\"gcs://tab6/metadata/v123.metadata.json\",\"status\":\"success\"}"));
+    fakeClient.addTable(
+        SnowflakeIdentifier.ofTable("DB_1", "SCHEMA_1", "TAB_NULL_STATUS"),
+        SnowflakeTableMetadata.parseJson(
+            "{\"metadataLocation\":\"s3://tab-null-status/metadata/v1.metadata.json\"}"));
 
     fakeFileIO = new InMemoryFileIO();
 
@@ -105,6 +109,12 @@ public class TestSnowflakeCatalog {
         TableMetadataParser.toJson(
                 TableMetadata.newTableMetadata(
                     schema, partitionSpec, "gs://tab5/", ImmutableMap.of()))
+            .getBytes());
+    fakeFileIO.addFile(
+        "s3://tab-null-status/metadata/v1.metadata.json",
+        TableMetadataParser.toJson(
+                TableMetadata.newTableMetadata(
+                    schema, partitionSpec, "s3://tab-null-status", ImmutableMap.of()))
             .getBytes());
 
     fakeFileIOFactory =
@@ -294,5 +304,12 @@ public class TestSnowflakeCatalog {
     assertThat(catalog.namespaceExists(Namespace.of("DB_1", "SCHEMA_1"))).isTrue();
     assertThat(catalog.namespaceExists(Namespace.of("DB_1", "NONEXISTENT_SCHEMA"))).isFalse();
     assertThat(catalog.namespaceExists(Namespace.of("NONEXISTENT_DB", "SCHEMA_1"))).isFalse();
+  }
+
+  @Test
+  public void testLoadTableWithNullStatus() {
+    Table table =
+        catalog.loadTable(TableIdentifier.of(Namespace.of("DB_1", "SCHEMA_1"), "TAB_NULL_STATUS"));
+    assertThat(table.location()).isEqualTo("s3://tab-null-status");
   }
 }

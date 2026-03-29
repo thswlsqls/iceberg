@@ -85,7 +85,7 @@ class SnowflakeTableOperations extends BaseMetastoreTableOperations {
       throw new NoSuchTableException("Cannot find table %s", snowflakeIdentifierForTable);
     }
 
-    if (!metadata.getStatus().equals("success")) {
+    if (!"success".equals(metadata.getStatus())) {
       LOG.warn(
           "Got non-successful table metadata: {} with metadataLocation {} for table {}",
           metadata.getStatus(),
