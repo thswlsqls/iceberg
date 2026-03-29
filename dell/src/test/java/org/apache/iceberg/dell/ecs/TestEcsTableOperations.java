@@ -44,7 +44,7 @@ public class TestEcsTableOperations {
   @RegisterExtension public EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testConcurrentCommit() {
+  public void concurrentCommit() {
     EcsCatalog catalog1 = createCatalog("test1");
     EcsCatalog catalog2 = createCatalog("test2");
 

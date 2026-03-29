@@ -34,7 +34,7 @@ public class TestExceptionCode {
   @RegisterExtension public EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testExceptionCode() {
+  public void exceptionCode() {
     String object = "test";
     assertS3Exception(
         "Append absent object",

@@ -34,7 +34,7 @@ public class TestEcsInputFile {
   @RegisterExtension public static EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testAbsentFile() {
+  public void absentFile() {
     String objectName = rule.randomObjectName();
     EcsInputFile inputFile =
         EcsInputFile.fromLocation(new EcsURI(rule.bucket(), objectName).toString(), rule.client());
@@ -42,7 +42,7 @@ public class TestEcsInputFile {
   }
 
   @Test
-  public void testFileRead() throws IOException {
+  public void fileRead() throws IOException {
     String objectName = rule.randomObjectName();
     EcsInputFile inputFile =
         EcsInputFile.fromLocation(new EcsURI(rule.bucket(), objectName).toString(), rule.client());

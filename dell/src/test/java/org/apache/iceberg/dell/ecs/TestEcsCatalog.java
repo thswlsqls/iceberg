@@ -68,7 +68,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testListTablesAndNamespaces() {
+  public void listTablesAndNamespaces() {
     ecsCatalog.createNamespace(Namespace.of("a"));
     ecsCatalog.createNamespace(Namespace.of("a", "b1"));
     ecsCatalog.createNamespace(Namespace.of("a", "b2"));
@@ -88,7 +88,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testNamespaceProperties() {
+  public void namespaceProperties() {
     ecsCatalog.createNamespace(Namespace.of("a"), ImmutableMap.of("a", "a"));
 
     assertThat(ecsCatalog.loadNamespaceMetadata(Namespace.of("a")))
@@ -106,7 +106,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testDropNamespace() {
+  public void dropNamespace() {
     ecsCatalog.createNamespace(Namespace.of("a"));
     ecsCatalog.createNamespace(Namespace.of("a", "b1"));
     ecsCatalog.createTable(TableIdentifier.of("a", "t1"), SCHEMA);
@@ -132,7 +132,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testDropTable() {
+  public void dropTable() {
     ecsCatalog.createTable(TableIdentifier.of("a"), SCHEMA);
 
     assertThat(ecsCatalog.dropTable(TableIdentifier.of("unknown")))
@@ -143,7 +143,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testRenameTable() {
+  public void renameTable() {
     ecsCatalog.createNamespace(Namespace.of("a"));
     ecsCatalog.createTable(TableIdentifier.of("a", "t1"), SCHEMA);
     ecsCatalog.createNamespace(Namespace.of("b"));
@@ -173,7 +173,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testRegisterTable() {
+  public void registerTable() {
     TableIdentifier identifier = TableIdentifier.of("a", "t1");
     ecsCatalog.createTable(identifier, SCHEMA);
     Table registeringTable = ecsCatalog.loadTable(identifier);
@@ -190,7 +190,7 @@ public class TestEcsCatalog {
   }
 
   @Test
-  public void testRegisterExistingTable() {
+  public void registerExistingTable() {
     TableIdentifier identifier = TableIdentifier.of("a", "t1");
     ecsCatalog.createTable(identifier, SCHEMA);
     Table registeringTable = ecsCatalog.loadTable(identifier);

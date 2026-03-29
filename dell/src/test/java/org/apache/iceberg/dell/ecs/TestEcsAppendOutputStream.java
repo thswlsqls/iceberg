@@ -35,7 +35,7 @@ public class TestEcsAppendOutputStream {
   @RegisterExtension public static EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testBaseObjectWrite() throws IOException {
+  public void baseObjectWrite() throws IOException {
     String objectName = rule.randomObjectName();
     try (EcsAppendOutputStream output =
         EcsAppendOutputStream.createWithBufferSize(
@@ -62,7 +62,7 @@ public class TestEcsAppendOutputStream {
   }
 
   @Test
-  public void testRewrite() throws IOException {
+  public void rewrite() throws IOException {
     String objectName = rule.randomObjectName();
     try (EcsAppendOutputStream output =
         EcsAppendOutputStream.createWithBufferSize(

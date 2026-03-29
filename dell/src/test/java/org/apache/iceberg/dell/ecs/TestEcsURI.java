@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 public class TestEcsURI {
 
   @Test
-  public void testConstructor() {
+  public void constructor() {
     assertURI("bucket", "", new EcsURI("ecs://bucket"));
     assertURI("bucket", "", new EcsURI("ecs://bucket/"));
     assertURI("bucket", "", new EcsURI("ecs://bucket//"));
@@ -38,7 +38,7 @@ public class TestEcsURI {
   }
 
   @Test
-  public void testConstructorWithBucketAndName() {
+  public void constructorWithBucketAndName() {
     assertURI("bucket", "", new EcsURI("bucket", ""));
     assertURI("bucket", "", new EcsURI("bucket", "/"));
     assertURI("bucket", "", new EcsURI("bucket", "//"));
@@ -54,7 +54,7 @@ public class TestEcsURI {
   }
 
   @Test
-  public void testInvalidLocation() {
+  public void invalidLocation() {
     assertThatThrownBy(() -> new EcsURI("http://bucket/a"))
         .isInstanceOf(ValidationException.class)
         .hasMessage("Invalid ecs location: http://bucket/a");

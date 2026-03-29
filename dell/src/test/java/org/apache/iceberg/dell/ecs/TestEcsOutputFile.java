@@ -37,7 +37,7 @@ public class TestEcsOutputFile {
   @RegisterExtension public static EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testFileWrite() throws IOException {
+  public void fileWrite() throws IOException {
     String objectName = rule.randomObjectName();
     EcsOutputFile outputFile =
         EcsOutputFile.fromLocation(new EcsURI(rule.bucket(), objectName).toString(), rule.client());
@@ -56,7 +56,7 @@ public class TestEcsOutputFile {
   }
 
   @Test
-  public void testFileOverwrite() throws IOException {
+  public void fileOverwrite() throws IOException {
     String objectName = rule.randomObjectName();
     EcsOutputFile outputFile =
         EcsOutputFile.fromLocation(new EcsURI(rule.bucket(), objectName).toString(), rule.client());
@@ -78,7 +78,7 @@ public class TestEcsOutputFile {
   }
 
   @Test
-  public void testFileAlreadyExists() throws IOException {
+  public void fileAlreadyExists() throws IOException {
     String objectName = rule.randomObjectName();
     EcsOutputFile outputFile =
         EcsOutputFile.fromLocation(new EcsURI(rule.bucket(), objectName).toString(), rule.client());

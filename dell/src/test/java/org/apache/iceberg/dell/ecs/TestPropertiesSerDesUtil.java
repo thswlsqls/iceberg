@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 public class TestPropertiesSerDesUtil {
 
   @Test
-  public void testPropertiesSerDes() {
+  public void propertiesSerDes() {
     Map<String, String> properties = ImmutableMap.of("a", "a", "b", "b");
     byte[] byteValue = PropertiesSerDesUtil.toBytes(properties);
     Map<String, String> result =

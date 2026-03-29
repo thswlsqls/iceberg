@@ -33,7 +33,7 @@ public class TestEcsSeekableInputStream {
   @RegisterExtension public static EcsS3MockRule rule = EcsS3MockRule.create();
 
   @Test
-  public void testSeekPosRead() throws IOException {
+  public void seekPosRead() throws IOException {
     String objectName = rule.randomObjectName();
     rule.client()
         .putObject(new PutObjectRequest(rule.bucket(), objectName, "0123456789".getBytes()));
@@ -47,7 +47,7 @@ public class TestEcsSeekableInputStream {
   }
 
   @Test
-  public void testMultipleSeekPosRead() throws IOException {
+  public void multipleSeekPosRead() throws IOException {
     String objectName = rule.randomObjectName();
     rule.client()
         .putObject(new PutObjectRequest(rule.bucket(), objectName, "0123456789".getBytes()));
@@ -62,7 +62,7 @@ public class TestEcsSeekableInputStream {
   }
 
   @Test
-  public void testReadOneByte() throws IOException {
+  public void readOneByte() throws IOException {
     String objectName = rule.randomObjectName();
     rule.client()
         .putObject(new PutObjectRequest(rule.bucket(), objectName, "0123456789".getBytes()));
@@ -75,7 +75,7 @@ public class TestEcsSeekableInputStream {
   }
 
   @Test
-  public void testReadBytes() throws IOException {
+  public void readBytes() throws IOException {
     String objectName = rule.randomObjectName();
     rule.client()
         .putObject(new PutObjectRequest(rule.bucket(), objectName, "0123456789".getBytes()));
