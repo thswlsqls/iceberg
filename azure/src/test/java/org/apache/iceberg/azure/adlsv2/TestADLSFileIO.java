@@ -38,7 +38,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class TestADLSFileIO {
 
   @Test
-  public void testConstructorWithClientSupplier() {
+  public void constructorWithClientSupplier() {
     DataLakeFileSystemClient mockClient = mock(DataLakeFileSystemClient.class);
     SerializableFunction<ADLSLocation, DataLakeFileSystemClient> supplier = location -> mockClient;
 
@@ -50,7 +50,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testConstructorWithClientSupplierAndInitialize() {
+  public void constructorWithClientSupplierAndInitialize() {
     DataLakeFileSystemClient mockClient = mock(DataLakeFileSystemClient.class);
     SerializableFunction<ADLSLocation, DataLakeFileSystemClient> supplier = location -> mockClient;
 
@@ -62,7 +62,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testClientSupplierIsUsed() {
+  public void clientSupplierIsUsed() {
     DataLakeFileSystemClient mockClient = mock(DataLakeFileSystemClient.class);
 
     SerializableFunction<ADLSLocation, DataLakeFileSystemClient> supplier = location -> mockClient;
@@ -78,7 +78,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testClientSupplierWithoutInitialize() {
+  public void clientSupplierWithoutInitialize() {
     DataLakeFileSystemClient mockClient = mock(DataLakeFileSystemClient.class);
     DataLakeFileClient mockFileClient = mock(DataLakeFileClient.class);
 
@@ -100,7 +100,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testNoArgConstructor() {
+  public void noArgConstructor() {
     ADLSFileIO fileIO = new ADLSFileIO();
 
     // Properties should be null before initialization
@@ -113,7 +113,7 @@ public class TestADLSFileIO {
 
   @ParameterizedTest
   @MethodSource("org.apache.iceberg.TestHelpers#serializers")
-  public void testSerializationWithClientSupplier(
+  public void serializationWithClientSupplier(
       TestHelpers.RoundTripSerializer<FileIO> roundTripSerializer)
       throws IOException, ClassNotFoundException {
     // Use an AtomicInteger to track supplier invocations across serialization
@@ -152,7 +152,7 @@ public class TestADLSFileIO {
 
   @ParameterizedTest
   @MethodSource("org.apache.iceberg.TestHelpers#serializers")
-  public void testSerializationWithNoArgConstructor(
+  public void serializationWithNoArgConstructor(
       TestHelpers.RoundTripSerializer<FileIO> roundTripSerializer)
       throws IOException, ClassNotFoundException {
     ADLSFileIO fileIO = new ADLSFileIO();
@@ -166,7 +166,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testClientSupplierIsCachedPerContainer() {
+  public void clientSupplierIsCachedPerContainer() {
     DataLakeFileSystemClient mockClient1 = mock(DataLakeFileSystemClient.class);
     DataLakeFileSystemClient mockClient2 = mock(DataLakeFileSystemClient.class);
     AtomicInteger supplierInvocationCount = new AtomicInteger(0);
@@ -198,7 +198,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testClientCachedPerStorageAccountAndContainer() {
+  public void clientCachedPerStorageAccountAndContainer() {
     DataLakeFileSystemClient mockClient1 = mock(DataLakeFileSystemClient.class);
     DataLakeFileSystemClient mockClient2 = mock(DataLakeFileSystemClient.class);
     DataLakeFileSystemClient mockClient3 = mock(DataLakeFileSystemClient.class);
@@ -248,7 +248,7 @@ public class TestADLSFileIO {
   }
 
   @Test
-  public void testClientSupplierCachingIsThreadSafe() throws Exception {
+  public void clientSupplierCachingIsThreadSafe() throws Exception {
     DataLakeFileSystemClient mockClient = mock(DataLakeFileSystemClient.class);
     AtomicInteger supplierInvocationCount = new AtomicInteger(0);
 

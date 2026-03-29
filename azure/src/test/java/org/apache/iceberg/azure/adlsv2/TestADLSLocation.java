@@ -30,7 +30,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class TestADLSLocation {
   @ParameterizedTest
   @ValueSource(strings = {"abfs", "abfss"})
-  public void testLocationParsing(String scheme) {
+  public void locationParsing(String scheme) {
     String p1 = scheme + "://container@account.dfs.core.windows.net/path/to/file";
     ADLSLocation location = new ADLSLocation(p1);
 
@@ -41,7 +41,7 @@ public class TestADLSLocation {
 
   @ParameterizedTest
   @ValueSource(strings = {"wasb", "wasbs"})
-  public void testWasbLocatonParsing(String scheme) {
+  public void wasbLocatonParsing(String scheme) {
     String p1 = scheme + "://container@account.blob.core.windows.net/path/to/file";
     ADLSLocation location = new ADLSLocation(p1);
 
@@ -51,7 +51,7 @@ public class TestADLSLocation {
   }
 
   @Test
-  public void testEncodedString() {
+  public void encodedString() {
     String p1 = "abfs://container@account.dfs.core.windows.net/path%20to%20file";
     ADLSLocation location = new ADLSLocation(p1);
 
@@ -61,21 +61,21 @@ public class TestADLSLocation {
   }
 
   @Test
-  public void testMissingScheme() {
+  public void missingScheme() {
     assertThatThrownBy(() -> new ADLSLocation("/path/to/file"))
         .isInstanceOf(ValidationException.class)
         .hasMessage("Invalid ADLS URI: /path/to/file");
   }
 
   @Test
-  public void testInvalidScheme() {
+  public void invalidScheme() {
     assertThatThrownBy(() -> new ADLSLocation("s3://bucket/path/to/file"))
         .isInstanceOf(ValidationException.class)
         .hasMessage("Invalid ADLS URI: s3://bucket/path/to/file");
   }
 
   @Test
-  public void testNoContainer() {
+  public void noContainer() {
     String p1 = "abfs://account.dfs.core.windows.net/path/to/file";
     ADLSLocation location = new ADLSLocation(p1);
 
@@ -85,7 +85,7 @@ public class TestADLSLocation {
   }
 
   @Test
-  public void testNoPath() {
+  public void noPath() {
     String p1 = "abfs://container@account.dfs.core.windows.net";
     ADLSLocation location = new ADLSLocation(p1);
 
@@ -96,7 +96,7 @@ public class TestADLSLocation {
 
   @ParameterizedTest
   @ValueSource(strings = {"file?.txt", "file%3F.txt"})
-  public void testQuestionMarkInFileName(String path) {
+  public void questionMarkInFileName(String path) {
     String fullPath = String.format("abfs://container@account.dfs.core.windows.net/%s", path);
     ADLSLocation location = new ADLSLocation(fullPath);
     assertThat(location.path()).contains(path);
@@ -112,7 +112,7 @@ public class TestADLSLocation {
     "wasb://account.blob.core.windows.net/path, account.blob.core.windows.net",
     "wasbs://account.blob.core.windows.net/path, account.blob.core.windows.net"
   })
-  void testHost(String path, String expectedHost) {
+  void host(String path, String expectedHost) {
     ADLSLocation location = new ADLSLocation(path);
     assertThat(location.host()).isEqualTo(expectedHost);
   }

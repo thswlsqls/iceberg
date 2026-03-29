@@ -63,7 +63,7 @@ public class TestAzureProperties {
 
   @ParameterizedTest
   @MethodSource("org.apache.iceberg.TestHelpers#serializers")
-  public void testSerializable(TestHelpers.RoundTripSerializer<AzureProperties> roundTripSerializer)
+  public void serializable(TestHelpers.RoundTripSerializer<AzureProperties> roundTripSerializer)
       throws IOException, ClassNotFoundException {
     AzureProperties props =
         new AzureProperties(
@@ -88,7 +88,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testWithSasToken() {
+  public void withSasToken() {
     AzureProperties props =
         new AzureProperties(ImmutableMap.of("adls.sas-token.account1", "token"));
 
@@ -100,7 +100,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testWithRefreshCredentialsEndpoint() {
+  public void withRefreshCredentialsEndpoint() {
     AzureProperties props =
         new AzureProperties(
             ImmutableMap.of(
@@ -121,7 +121,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testWithRefreshCredentialsEndpointDisabled() {
+  public void withRefreshCredentialsEndpointDisabled() {
     AzureProperties props =
         new AzureProperties(
             ImmutableMap.of(
@@ -139,7 +139,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testNoMatchingSasToken() {
+  public void noMatchingSasToken() {
     AzureProperties props =
         new AzureProperties(ImmutableMap.of("adls.sas-token.account1", "token"));
 
@@ -151,7 +151,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testNoSasToken() {
+  public void noSasToken() {
     AzureProperties props = new AzureProperties();
 
     DataLakeFileSystemClientBuilder clientBuilder = mock(DataLakeFileSystemClientBuilder.class);
@@ -162,7 +162,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testWithConnectionString() {
+  public void withConnectionString() {
     AzureProperties props =
         new AzureProperties(ImmutableMap.of("adls.connection-string.account1", "http://endpoint"));
 
@@ -172,7 +172,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testNoMatchingConnectionString() {
+  public void noMatchingConnectionString() {
     AzureProperties props =
         new AzureProperties(ImmutableMap.of("adls.connection-string.account2", "http://endpoint"));
 
@@ -182,7 +182,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testNoConnectionString() {
+  public void noConnectionString() {
     AzureProperties props = new AzureProperties();
 
     DataLakeFileSystemClientBuilder clientBuilder = mock(DataLakeFileSystemClientBuilder.class);
@@ -191,7 +191,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testSharedKey() {
+  public void sharedKey() {
     assertThatIllegalArgumentException()
         .isThrownBy(
             () ->
@@ -224,7 +224,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testAdlsToken() {
+  public void adlsToken() {
     String testToken = "test-token-value";
     AzureProperties props = new AzureProperties(ImmutableMap.of("adls.token", testToken));
 
@@ -249,7 +249,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testDefaultTokenCredentialProvider() {
+  public void defaultTokenCredentialProvider() {
     // No SAS, no shared key, no explicit token, no refresh endpoint -> default token provider
     AzureProperties props = new AzureProperties(ImmutableMap.of());
 
@@ -264,7 +264,7 @@ public class TestAzureProperties {
   }
 
   @Test
-  public void testCustomTokenCredentialProvider() {
+  public void customTokenCredentialProvider() {
     ImmutableMap<String, String> properties =
         ImmutableMap.<String, String>builder()
             .put(

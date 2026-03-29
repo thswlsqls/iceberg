@@ -50,14 +50,14 @@ class TestADLSInputStream {
   }
 
   @Test
-  void testReadFullyClosesTheStream() throws IOException {
+  void readFullyClosesTheStream() throws IOException {
     adlsInputStream.readFully(0, new byte[0]);
 
     verify(inputStream).close();
   }
 
   @Test
-  void testReadTailClosesTheStream() throws IOException {
+  void readTailClosesTheStream() throws IOException {
     adlsInputStream.readTail(new byte[0], 0, 0);
 
     verify(inputStream).close();
