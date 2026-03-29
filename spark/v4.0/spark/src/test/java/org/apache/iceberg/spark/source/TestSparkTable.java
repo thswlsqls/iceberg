@@ -21,6 +21,7 @@ package org.apache.iceberg.spark.source;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.iceberg.ParameterizedTestExtension;
+import org.apache.iceberg.Table;
 import org.apache.iceberg.spark.CatalogTestBase;
 import org.apache.spark.sql.catalyst.analysis.NoSuchTableException;
 import org.apache.spark.sql.connector.catalog.CatalogManager;
@@ -55,5 +56,25 @@ public class TestSparkTable extends CatalogTestBase {
     // different instances pointing to the same table must be equivalent
     assertThat(table1).as("References must be different").isNotSameAs(table2);
     assertThat(table1).as("Tables must be equivalent").isEqualTo(table2);
+  }
+
+  @TestTemplate
+  public void testTableEqualityWithDifferentSnapshotIds() {
+    sql("INSERT INTO %s VALUES (1, 'a')", tableName);
+    sql("INSERT INTO %s VALUES (2, 'b')", tableName);
+
+    Table icebergTable = validationCatalog.loadTable(tableIdent);
+    long snapshot1 = icebergTable.history().get(0).snapshotId();
+    long snapshot2 = icebergTable.history().get(1).snapshotId();
+
+    SparkTable table1 = new SparkTable(icebergTable, snapshot1, false);
+    SparkTable table2 = new SparkTable(icebergTable, snapshot2, false);
+
+    assertThat(table1)
+        .as("Tables with different snapshot IDs must not be equal")
+        .isNotEqualTo(table2);
+    assertThat(table1.hashCode())
+        .as("Tables with different snapshot IDs must have different hash codes")
+        .isNotEqualTo(table2.hashCode());
   }
 }

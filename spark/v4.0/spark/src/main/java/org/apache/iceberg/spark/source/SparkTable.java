@@ -23,6 +23,7 @@ import static org.apache.iceberg.TableProperties.FORMAT_VERSION;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.iceberg.BaseMetadataTable;
 import org.apache.iceberg.BaseTable;
@@ -466,15 +467,15 @@ public class SparkTable
       return false;
     }
 
-    // use only name in order to correctly invalidate Spark cache
     SparkTable that = (SparkTable) other;
-    return icebergTable.name().equals(that.icebergTable.name());
+    return icebergTable.name().equals(that.icebergTable.name())
+        && Objects.equals(snapshotId, that.snapshotId)
+        && Objects.equals(branch, that.branch);
   }
 
   @Override
   public int hashCode() {
-    // use only name in order to correctly invalidate Spark cache
-    return icebergTable.name().hashCode();
+    return Objects.hash(icebergTable.name(), snapshotId, branch);
   }
 
   private static CaseInsensitiveStringMap addSnapshotId(
