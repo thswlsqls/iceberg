@@ -82,10 +82,14 @@ rck.credential=<oauth_key>:<oauth_secret>             ## -> credential=<oauth_ke
 Some test behaviors are configurable depending on the catalog implementations.  Not all behaviors
 are strictly defined by the REST Specification.  The following are currently configurable:
 
-| config                        | default |
-|-------------------------------|---------|
-| rck.requires-namespace-create | true    |
-| rck.supports-serverside-retry | true    |
+| config                          | default | description                                                            |
+|---------------------------------|---------|------------------------------------------------------------------------|
+| rck.local                       | true    | Run a local REST server for testing; set to false for external servers  |
+| rck.requires-namespace-create   | true    | Whether the catalog requires namespaces to be explicitly created        |
+| rck.supports-serverside-retry   | true    | Whether the catalog supports server-side retry                         |
+| rck.overrides-requested-location| false   | Whether the catalog overrides the requested table location              |
+| rck.supports-names-with-dot     | false   | Whether the catalog supports namespace/table names containing dots      |
+| rck.purge-test-namespaces       | true    | Whether to purge test namespaces before each test                      |
 
 
 ## Running Compatibility Tests
