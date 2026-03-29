@@ -76,6 +76,7 @@ class DefaultS3FileIOAwsClientFactory implements S3FileIOAwsClientFactory {
         .applyMutation(awsClientProperties::applyClientCredentialConfigurations)
         .applyMutation(awsClientProperties::applyLegacyMd5Plugin)
         .applyMutation(s3FileIOProperties::applyEndpointConfigurations)
+        .applyMutation(s3FileIOProperties::applyServiceConfigurations)
         .build();
   }
 }
