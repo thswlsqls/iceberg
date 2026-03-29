@@ -121,7 +121,7 @@ public class TestGCSFileIO {
   }
 
   @Test
-  public void testDelete() {
+  public void delete() {
     String path = "delete/path/data.dat";
     storage.create(BlobInfo.newBuilder(TEST_BUCKET, path).build());
 
@@ -145,7 +145,7 @@ public class TestGCSFileIO {
   }
 
   @Test
-  public void testListPrefix() {
+  public void listPrefix() {
     String prefix = "list/path/";
     String path1 = prefix + "data1.dat";
     storage.create(BlobInfo.newBuilder(TEST_BUCKET, path1).build());
@@ -165,7 +165,7 @@ public class TestGCSFileIO {
   }
 
   @Test
-  public void testDeleteFiles() {
+  public void deleteFiles() {
     String prefix = "del/path/";
     String path1 = prefix + "data1.dat";
     storage.create(BlobInfo.newBuilder(TEST_BUCKET, path1).build());
@@ -186,7 +186,7 @@ public class TestGCSFileIO {
   }
 
   @Test
-  public void testDeletePrefix() {
+  public void deletePrefix() {
     String prefix = "del/path/";
     String path1 = prefix + "data1.dat";
     storage.create(BlobInfo.newBuilder(TEST_BUCKET, path1).build());
@@ -206,8 +206,7 @@ public class TestGCSFileIO {
 
   @ParameterizedTest
   @MethodSource("org.apache.iceberg.TestHelpers#serializers")
-  public void testGCSFileIOSerialization(
-      TestHelpers.RoundTripSerializer<FileIO> roundTripSerializer)
+  public void gcsFileIOSerialization(TestHelpers.RoundTripSerializer<FileIO> roundTripSerializer)
       throws IOException, ClassNotFoundException {
 
     FileIO testGCSFileIO = new GCSFileIO();
@@ -220,7 +219,7 @@ public class TestGCSFileIO {
   }
 
   @Test
-  public void testResolvingFileIOLoad() {
+  public void resolvingFileIOLoad() {
     ResolvingFileIO resolvingFileIO = new ResolvingFileIO();
     resolvingFileIO.setConf(new Configuration());
     resolvingFileIO.initialize(ImmutableMap.of());

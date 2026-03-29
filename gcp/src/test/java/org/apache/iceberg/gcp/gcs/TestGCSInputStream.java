@@ -44,7 +44,7 @@ public class TestGCSInputStream {
   private final Storage storage = LocalStorageHelper.getOptions().getService();
 
   @Test
-  public void testRead() throws Exception {
+  public void read() throws Exception {
     BlobId uri = BlobId.fromGsUtilUri("gs://bucket/path/to/read.dat");
     int dataSize = 1024 * 1024 * 10;
     byte[] data = randomData(dataSize);
@@ -80,7 +80,7 @@ public class TestGCSInputStream {
   }
 
   @Test
-  public void testReadSingle() throws Exception {
+  public void readSingle() throws Exception {
     BlobId uri = BlobId.fromGsUtilUri("gs://bucket/path/to/read.dat");
     int i0 = 1;
     int i1 = 255;
@@ -118,7 +118,7 @@ public class TestGCSInputStream {
   }
 
   @Test
-  public void testRangeRead() throws Exception {
+  public void rangeRead() throws Exception {
     BlobId uri = BlobId.fromGsUtilUri("gs://bucket/path/to/read.dat");
     int dataSize = 1024 * 1024 * 10;
     byte[] expected = randomData(dataSize);
@@ -161,7 +161,7 @@ public class TestGCSInputStream {
   }
 
   @Test
-  public void testClose() throws Exception {
+  public void close() throws Exception {
     BlobId blobId = BlobId.fromGsUtilUri("gs://bucket/path/to/closed.dat");
     SeekableInputStream closed =
         new GCSInputStream(storage, blobId, null, gcpProperties, MetricsContext.nullMetrics());
@@ -172,7 +172,7 @@ public class TestGCSInputStream {
   }
 
   @Test
-  public void testSeek() throws Exception {
+  public void seek() throws Exception {
     BlobId blobId = BlobId.fromGsUtilUri("gs://bucket/path/to/seek.dat");
     byte[] data = randomData(1024 * 1024);
 

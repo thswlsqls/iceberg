@@ -43,7 +43,7 @@ public class TestGCSOutputStream {
   private final Random random = new Random(1);
 
   @Test
-  public void testWrite() {
+  public void write() {
     // Run tests for both byte and array write paths
     Stream.of(true, false)
         .forEach(
@@ -57,7 +57,7 @@ public class TestGCSOutputStream {
   }
 
   @Test
-  public void testMultipleClose() throws IOException {
+  public void multipleClose() throws IOException {
     GCSOutputStream stream =
         new GCSOutputStream(storage, randomBlobId(), properties, MetricsContext.nullMetrics());
     stream.close();

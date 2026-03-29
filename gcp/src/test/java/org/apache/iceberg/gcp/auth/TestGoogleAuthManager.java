@@ -235,7 +235,7 @@ public class TestGoogleAuthManager {
   }
 
   @Test
-  public void testLoadAuthManager() {
+  public void loadAuthManager() {
     AuthManager manager =
         AuthManagers.loadAuthManager(
             "test", Map.of(AuthProperties.AUTH_TYPE, AuthProperties.AUTH_TYPE_GOOGLE));

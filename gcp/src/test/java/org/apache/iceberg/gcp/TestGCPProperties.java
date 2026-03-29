@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 public class TestGCPProperties {
 
   @Test
-  public void testOAuthWithNoAuth() {
+  public void oauthWithNoAuth() {
     assertThatIllegalStateException()
         .isThrownBy(
             () ->

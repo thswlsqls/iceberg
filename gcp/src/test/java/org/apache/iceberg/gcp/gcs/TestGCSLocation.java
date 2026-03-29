@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 public class TestGCSLocation {
   @Test
-  public void testLocationParsing() {
+  public void locationParsing() {
     String p1 = "gs://bucket/path/to/prefix";
     GCSLocation location = new GCSLocation(p1);
 
@@ -35,7 +35,7 @@ public class TestGCSLocation {
   }
 
   @Test
-  public void testEncodedString() {
+  public void encodedString() {
     String p1 = "gs://bucket/path%20to%20prefix";
     GCSLocation location = new GCSLocation(p1);
 
@@ -44,21 +44,21 @@ public class TestGCSLocation {
   }
 
   @Test
-  public void testMissingScheme() {
+  public void missingScheme() {
     assertThatThrownBy(() -> new GCSLocation("/path/to/prefix"))
         .isInstanceOf(ValidationException.class)
         .hasMessage("Invalid GCS URI, cannot determine scheme: /path/to/prefix");
   }
 
   @Test
-  public void testInvalidScheme() {
+  public void invalidScheme() {
     assertThatThrownBy(() -> new GCSLocation("s3://bucket/path/to/prefix"))
         .isInstanceOf(ValidationException.class)
         .hasMessage("Invalid GCS URI, invalid scheme: s3");
   }
 
   @Test
-  public void testOnlyBucketNameLocation() {
+  public void onlyBucketNameLocation() {
     String p1 = "gs://bucket";
     GCSLocation location = new GCSLocation(p1);
 
@@ -67,7 +67,7 @@ public class TestGCSLocation {
   }
 
   @Test
-  public void testQueryAndFragment() {
+  public void queryAndFragment() {
     String p1 = "gs://bucket/path/to/prefix?query=foo#bar";
     GCSLocation location = new GCSLocation(p1);
 
