@@ -72,7 +72,7 @@ public class TestMultipleClients extends BaseTestIceberg {
   }
 
   @Test
-  public void testListNamespaces() throws NessieConflictException, NessieNotFoundException {
+  public void listNamespaces() throws NessieConflictException, NessieNotFoundException {
     assertThat(catalog.listNamespaces()).isEmpty();
     assertThat(anotherCatalog.listNamespaces()).isEmpty();
 
@@ -112,7 +112,7 @@ public class TestMultipleClients extends BaseTestIceberg {
   }
 
   @Test
-  public void testLoadNamespaceMetadata() throws NessieConflictException, NessieNotFoundException {
+  public void loadNamespaceMetadata() throws NessieConflictException, NessieNotFoundException {
     assertThatThrownBy(() -> catalog.loadNamespaceMetadata(Namespace.of("namespace1")))
         .isInstanceOf(NoSuchNamespaceException.class)
         .hasMessageContaining("Namespace does not exist: namespace1");
@@ -158,7 +158,7 @@ public class TestMultipleClients extends BaseTestIceberg {
   }
 
   @Test
-  public void testListTables() {
+  public void listTables() {
     createTable(TableIdentifier.parse("foo.tbl1"), SCHEMA);
     assertThat(catalog.listTables(Namespace.of("foo")))
         .containsExactlyInAnyOrder(TableIdentifier.parse("foo.tbl1"));
@@ -175,7 +175,7 @@ public class TestMultipleClients extends BaseTestIceberg {
   }
 
   @Test
-  public void testCommits() {
+  public void commits() {
     TableIdentifier identifier = TableIdentifier.parse("foo.tbl1");
     createTable(identifier, SCHEMA);
     Table tableFromCatalog = catalog.loadTable(identifier);
@@ -192,7 +192,7 @@ public class TestMultipleClients extends BaseTestIceberg {
   }
 
   @Test
-  public void testConcurrentCommitsWithRefresh() {
+  public void concurrentCommitsWithRefresh() {
     TableIdentifier identifier = TableIdentifier.parse("foo.tbl1");
     createTable(identifier, SCHEMA);
 

@@ -204,7 +204,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testCreate() throws IOException {
+  public void create() throws IOException {
     // Table should be created in iceberg
     // Table should be renamed in iceberg
     String tableName = TABLE_IDENTIFIER.name();
@@ -224,7 +224,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRename() throws NessieNotFoundException {
+  public void rename() throws NessieNotFoundException {
     String renamedTableName = "rename_table_name";
     TableIdentifier renameTableIdentifier =
         TableIdentifier.of(TABLE_IDENTIFIER.namespace(), renamedTableName);
@@ -248,7 +248,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRenameWithTableReference() throws NessieNotFoundException {
+  public void renameWithTableReference() throws NessieNotFoundException {
     String renamedTableName = "rename_table_name";
     TableIdentifier renameTableIdentifier =
         TableIdentifier.of(TABLE_IDENTIFIER.namespace(), renamedTableName);
@@ -287,7 +287,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRenameWithTableReferenceInvalidCase() throws NessieNotFoundException {
+  public void renameWithTableReferenceInvalidCase() throws NessieNotFoundException {
     String renamedTableName = "rename_table_name";
     TableIdentifier renameTableIdentifier =
         TableIdentifier.of(TABLE_IDENTIFIER.namespace(), renamedTableName);
@@ -352,7 +352,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testDrop() throws NessieNotFoundException {
+  public void drop() throws NessieNotFoundException {
     assertThat(catalog.tableExists(TABLE_IDENTIFIER)).isTrue();
     assertThat(catalog.dropTable(TABLE_IDENTIFIER)).isTrue();
     assertThat(catalog.tableExists(TABLE_IDENTIFIER)).isFalse();
@@ -360,7 +360,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testDropWithTableReference() throws NessieNotFoundException {
+  public void dropWithTableReference() throws NessieNotFoundException {
     ImmutableTableReference tableReference =
         ImmutableTableReference.builder()
             .reference(catalog.currentRefName())
@@ -375,7 +375,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testDropWithoutPurgeLeavesTableData() throws IOException {
+  public void dropWithoutPurgeLeavesTableData() throws IOException {
     Table table = catalog.loadTable(TABLE_IDENTIFIER);
 
     String fileLocation = addRecordsToFile(table, "file");
@@ -395,7 +395,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testDropTable() throws IOException {
+  public void dropTable() throws IOException {
     Table table = catalog.loadTable(TABLE_IDENTIFIER);
 
     String location1 = addRecordsToFile(table, "file1");
@@ -442,7 +442,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRegisterTableWithGivenBranch() throws Exception {
+  public void registerTableWithGivenBranch() throws Exception {
     List<String> metadataVersionFiles = metadataVersionFiles(tableLocation);
     assertThat(1).isEqualTo(metadataVersionFiles.size());
     ImmutableTableReference tableReference =
@@ -460,7 +460,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRegisterTableFailureScenarios()
+  public void registerTableFailureScenarios()
       throws NessieConflictException, NessieNotFoundException {
     List<String> metadataVersionFiles = metadataVersionFiles(tableLocation);
     assertThat(1).isEqualTo(metadataVersionFiles.size());
@@ -509,7 +509,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRegisterTableWithDefaultBranch() {
+  public void registerTableWithDefaultBranch() {
     List<String> metadataVersionFiles = metadataVersionFiles(tableLocation);
     assertThat(1).isEqualTo(metadataVersionFiles.size());
     assertThat(catalog.dropTable(TABLE_IDENTIFIER, false)).isTrue();
@@ -517,7 +517,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testRegisterTableMoreThanOneBranch() throws Exception {
+  public void registerTableMoreThanOneBranch() throws Exception {
     List<String> metadataVersionFiles = metadataVersionFiles(tableLocation);
     assertThat(1).isEqualTo(metadataVersionFiles.size());
     ImmutableTableReference tableReference =
@@ -537,7 +537,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testExistingTableUpdate() {
+  public void existingTableUpdate() {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
     // add a column
     icebergTable.updateSchema().addColumn("data", Types.LongType.get()).commit();
@@ -551,7 +551,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testFailure() throws NessieNotFoundException, NessieConflictException {
+  public void failure() throws NessieNotFoundException, NessieConflictException {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
     Branch branch = (Branch) api.getReference().refName(BRANCH).get();
 
@@ -572,7 +572,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testListTables() {
+  public void listTables() {
     List<TableIdentifier> tableIdents = catalog.listTables(TABLE_IDENTIFIER.namespace());
     List<TableIdentifier> expectedIdents =
         tableIdents.stream()
@@ -584,7 +584,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testGCDisabled() {
+  public void gcDisabled() {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
 
     assertThat(icebergTable.properties()).containsEntry(TableProperties.GC_ENABLED, "false");
@@ -598,7 +598,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testGCEnabled() {
+  public void gcEnabled() {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
     icebergTable.updateProperties().set(TableProperties.GC_ENABLED, "true").commit();
     assertThat(icebergTable.properties()).containsEntry(TableProperties.GC_ENABLED, "true");
@@ -610,7 +610,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testGCEnabledViaTableDefaultCatalogProperty() {
+  public void gcEnabledViaTableDefaultCatalogProperty() {
     catalog.dropTable(TABLE_IDENTIFIER, false); // pre-created in @BeforeEach
 
     catalog =
@@ -632,7 +632,7 @@ public class TestNessieTable extends BaseTestIceberg {
   }
 
   @Test
-  public void testTableMetadataFilesCleanupDisable() throws NessieNotFoundException {
+  public void tableMetadataFilesCleanupDisable() throws NessieNotFoundException {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
 
     icebergTable

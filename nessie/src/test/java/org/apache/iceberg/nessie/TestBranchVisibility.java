@@ -89,13 +89,13 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testBranchNoChange() {
+  public void branchNoChange() {
     testCatalogEquality(catalog, testCatalog, true, true, () -> {});
   }
 
   /** Ensure catalogs can't see each others updates. */
   @Test
-  public void testUpdateCatalogs() {
+  public void updateCatalogs() {
     testCatalogEquality(
         catalog, testCatalog, false, true, () -> updateSchema(catalog, tableIdentifier1));
 
@@ -104,7 +104,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testCatalogOnReference() {
+  public void catalogOnReference() {
     updateSchema(catalog, tableIdentifier1);
     updateSchema(testCatalog, tableIdentifier2);
 
@@ -118,7 +118,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testCatalogWithTableNames() {
+  public void catalogWithTableNames() {
     updateSchema(testCatalog, tableIdentifier2);
 
     String mainName = SnapshotRef.MAIN_BRANCH;
@@ -136,7 +136,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testConcurrentChanges() {
+  public void concurrentChanges() {
     NessieCatalog emptyTestCatalog = initCatalog("test");
     updateSchema(testCatalog, tableIdentifier1);
     // Updating table with out of date hash. We expect this to succeed because of retry despite the
@@ -145,7 +145,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testSchemaSnapshot() throws Exception {
+  public void schemaSnapshot() throws Exception {
 
     String branchTest = "test";
     String branch1 = "branch-1";
@@ -190,7 +190,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testMetadataLocation() throws Exception {
+  public void metadataLocation() throws Exception {
     String branch1 = "test";
     String branch2 = "branch-2";
 
@@ -220,7 +220,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
    * and retained when working with a mixture of DDLs and DMLs across multiple branches.
    */
   @Test
-  public void testStateTrackingOnMultipleBranches() throws Exception {
+  public void stateTrackingOnMultipleBranches() throws Exception {
 
     String branchTest = "test";
     String branchA = "branch_a";
@@ -447,7 +447,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testWithRefAndHash() throws NessieConflictException, NessieNotFoundException {
+  public void withRefAndHash() throws NessieConflictException, NessieNotFoundException {
     String testBranch = "testBranch";
     createBranch(testBranch);
     Schema schema =
@@ -499,7 +499,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testDifferentTableSameName() throws NessieConflictException, NessieNotFoundException {
+  public void differentTableSameName() throws NessieConflictException, NessieNotFoundException {
     String branch1 = "branch1";
     String branch2 = "branch2";
     createBranch(branch1);
@@ -530,7 +530,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testViewMetadataLocation() throws Exception {
+  public void viewMetadataLocation() throws Exception {
     String branch1 = "branch-1";
     String branch2 = "branch-2";
 
@@ -569,7 +569,7 @@ public class TestBranchVisibility extends BaseTestIceberg {
   }
 
   @Test
-  public void testDifferentViewSameName() throws NessieConflictException, NessieNotFoundException {
+  public void differentViewSameName() throws NessieConflictException, NessieNotFoundException {
     String branch1 = "branch1";
     String branch2 = "branch2";
     createBranch(branch1);

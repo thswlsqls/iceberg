@@ -182,7 +182,7 @@ public class TestNessieCatalog extends CatalogTests<NessieCatalog> {
   }
 
   @Test
-  public void testWarehouseLocationWithTrailingSlash() {
+  public void warehouseLocationWithTrailingSlash() {
     assertThat(catalog.defaultWarehouseLocation(TABLE))
         .startsWith(
             LocationUtil.stripTrailingSlash(temp.toUri().toString())

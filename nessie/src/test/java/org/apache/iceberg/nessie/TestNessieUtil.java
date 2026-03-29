@@ -29,14 +29,14 @@ import org.projectnessie.model.CommitMeta;
 public class TestNessieUtil {
 
   @Test
-  public void testBuildingCommitMetadataWithNullCatalogOptions() {
+  public void buildingCommitMetadataWithNullCatalogOptions() {
     assertThatThrownBy(() -> NessieUtil.buildCommitMetadata("msg", null))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("catalogOptions must not be null");
   }
 
   @Test
-  public void testSparkAppIdAndUserIsSetOnCommitMetadata() {
+  public void sparkAppIdAndUserIsSetOnCommitMetadata() {
     String commitMsg = "commit msg";
     String appId = "SPARK_ID_123";
     String user = "sparkUser";
@@ -52,7 +52,7 @@ public class TestNessieUtil {
   }
 
   @Test
-  public void testAuthorIsSetOnCommitMetadata() {
+  public void authorIsSetOnCommitMetadata() {
     String commitMsg = "commit msg";
     CommitMeta commitMeta = NessieUtil.buildCommitMetadata(commitMsg, ImmutableMap.of());
     assertThat(commitMeta.getMessage()).isEqualTo(commitMsg);
@@ -62,7 +62,7 @@ public class TestNessieUtil {
   }
 
   @Test
-  public void testAuthorIsNullWithoutJvmUser() {
+  public void authorIsNullWithoutJvmUser() {
     String jvmUserName = System.getProperty("user.name");
     try {
       System.clearProperty("user.name");

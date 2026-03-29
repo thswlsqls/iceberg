@@ -195,7 +195,7 @@ public class TestNessieView extends BaseTestIceberg {
   }
 
   @Test
-  public void testUpdate() throws IOException {
+  public void update() throws IOException {
     String viewName = VIEW_IDENTIFIER.name();
     View icebergView = catalog.loadView(VIEW_IDENTIFIER);
     // add a column
@@ -217,7 +217,7 @@ public class TestNessieView extends BaseTestIceberg {
   }
 
   @Test
-  public void testRenameWithTableReference() throws NessieNotFoundException {
+  public void renameWithTableReference() throws NessieNotFoundException {
     String renamedViewName = "rename_view_name";
     TableIdentifier renameViewIdentifier =
         TableIdentifier.of(VIEW_IDENTIFIER.namespace(), renamedViewName);
@@ -247,7 +247,7 @@ public class TestNessieView extends BaseTestIceberg {
   }
 
   @Test
-  public void testRenameWithTableReferenceInvalidCase() {
+  public void renameWithTableReferenceInvalidCase() {
     String renamedViewName = "rename_view_name";
     TableIdentifier renameViewIdentifier =
         TableIdentifier.of(VIEW_IDENTIFIER.namespace(), renamedViewName);
@@ -314,7 +314,7 @@ public class TestNessieView extends BaseTestIceberg {
   }
 
   @Test
-  public void testDrop() throws NessieNotFoundException {
+  public void drop() throws NessieNotFoundException {
     assertThat(catalog.viewExists(VIEW_IDENTIFIER)).isTrue();
     assertThat(catalog.dropView(VIEW_IDENTIFIER)).isTrue();
     assertThat(catalog.viewExists(VIEW_IDENTIFIER)).isFalse();
@@ -323,7 +323,7 @@ public class TestNessieView extends BaseTestIceberg {
   }
 
   @Test
-  public void testListViews() {
+  public void listViews() {
     TableIdentifier newIdentifier = TableIdentifier.of(DB_NAME, "newView");
     createView(catalog, newIdentifier, SCHEMA);
 

@@ -49,7 +49,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testListNamespaces() {
+  public void listNamespaces() {
     Namespace nsA = Namespace.of("a");
     Namespace nsAB = Namespace.of("a", "b");
     Namespace nsABC = Namespace.of("a", "b", "c");
@@ -83,7 +83,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testCreatingAndDroppingNamespace() {
+  public void creatingAndDroppingNamespace() {
     Namespace namespace = Namespace.of("test");
     catalog.createNamespace(namespace, ImmutableMap.of());
     assertThat(catalog.namespaceExists(namespace)).isTrue();
@@ -92,7 +92,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testCreatingAndDroppingNamespaceWithContent() throws NessieNotFoundException {
+  public void creatingAndDroppingNamespaceWithContent() throws NessieNotFoundException {
     Namespace namespace = Namespace.of("test");
     catalog.createNamespace(namespace, ImmutableMap.of());
     assertThat(catalog.namespaceExists(namespace)).isTrue();
@@ -116,7 +116,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testSettingProperties() {
+  public void settingProperties() {
     Map<String, String> properties = ImmutableMap.of("prop", "val");
     Namespace namespace = Namespace.of("withProperties");
     catalog.createNamespace(namespace, properties);
@@ -134,7 +134,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testEmptyNamespace() {
+  public void emptyNamespace() {
     assertThatThrownBy(() -> catalog.createNamespace(Namespace.empty(), Collections.emptyMap()))
         .isInstanceOf(NoSuchNamespaceException.class)
         .hasMessage("Invalid namespace: ");
@@ -162,7 +162,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testRemovingProperties() {
+  public void removingProperties() {
     Map<String, String> properties = ImmutableMap.of("prop2", "val2", "prop", "val");
     Namespace namespace = Namespace.of("withPropertyDeletes");
     catalog.createNamespace(namespace, properties);
@@ -179,7 +179,7 @@ public class TestNamespace extends BaseTestIceberg {
   }
 
   @Test
-  public void testCustomLocation() {
+  public void customLocation() {
     Map<String, String> properties = ImmutableMap.of("location", "/custom/location");
     Namespace namespaceWithLocation = Namespace.of("withLocation");
     catalog.createNamespace(namespaceWithLocation, properties);

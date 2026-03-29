@@ -37,7 +37,7 @@ public class TestCustomNessieClient extends BaseTestIceberg {
   }
 
   @Test
-  public void testNoCustomClient() {
+  public void noCustomClient() {
     NessieCatalog catalog = new NessieCatalog();
     catalog.initialize(
         "nessie",
@@ -51,7 +51,7 @@ public class TestCustomNessieClient extends BaseTestIceberg {
   }
 
   @Test
-  public void testUnnecessaryDefaultCustomClient() {
+  public void unnecessaryDefaultCustomClient() {
     NessieCatalog catalog = new NessieCatalog();
     catalog.initialize(
         "nessie",
@@ -67,7 +67,7 @@ public class TestCustomNessieClient extends BaseTestIceberg {
   }
 
   @Test
-  public void testNonExistentCustomClient() {
+  public void nonExistentCustomClient() {
     assertThatThrownBy(
             () -> {
               NessieCatalog catalog = new NessieCatalog();
@@ -86,7 +86,7 @@ public class TestCustomNessieClient extends BaseTestIceberg {
   }
 
   @Test
-  public void testCustomClientByName() {
+  public void customClientByName() {
     assertThatThrownBy(
             () -> {
               NessieCatalog catalog = new NessieCatalog();
@@ -105,7 +105,7 @@ public class TestCustomNessieClient extends BaseTestIceberg {
   }
 
   @Test
-  public void testAlternativeInitializeWithNulls() {
+  public void alternativeInitializeWithNulls() {
     NessieCatalog catalog = new NessieCatalog();
     NessieIcebergClient client = new NessieIcebergClient(null, null, null, null);
     FileIO fileIO = new TestCatalogUtil.TestFileIONoArg();
